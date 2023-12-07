@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/sideBar.css" />
   <title>Cadastro de Equipe</title>
 </head>
 <body>
@@ -44,9 +45,9 @@
             <div th:if="${#fields.hasErrors('funcao')}" th:each="error : ${#fields.errors('funcao')}" class="invalid-feedback" th:text="${error}"></div>
           </div>
 
-          <!-- Seleção do Funcionário -->
+          <!-- Seleção do funcionário -->
           <div class="form-group">
-            <label for="funcionario">Mecânico:</label>
+            <label for="funcionario">Mecânicos</label>
             <select id="funcionario" th:field="*{funcionario.id}" class="form-control" required>
               <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
             </select>
@@ -63,6 +64,23 @@
   </div>
 </main>
 
+<script>
+  const btn_menu = document.querySelector(".btn-menu");
+  const side_bar = document.querySelector(".sidebar");
+
+  btn_menu.addEventListener("click", function () {
+    side_bar.classList.toggle("expand");
+    changebtn();
+  });
+
+  function changebtn() {
+    if (side_bar.classList.contains("expand")) {
+      btn_menu.classList.replace("bx-menu", "bx-menu-alt-right");
+    } else {
+      btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
+    }
+  }
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

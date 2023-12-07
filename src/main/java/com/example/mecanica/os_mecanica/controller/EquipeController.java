@@ -1,4 +1,12 @@
 package com.example.mecanica.os_mecanica.controller;
+import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.mecanica.os_mecanica.model.Equipe;
 import com.example.mecanica.os_mecanica.model.Funcionario;
@@ -9,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Controller
@@ -24,52 +31,49 @@ public class EquipeController {
     @GetMapping("/adicionar/equipe")
     public String mostrarFormulario(Model model) {
         Equipe equipe = new Equipe();
-        List<Funcionario> funcionarios = funcionarioRepository.findAll();
+        List<Funcionario> funcionariosDisponiveis = funcionarioRepository.findAll();
         model.addAttribute("equipe", equipe);
-        model.addAttribute("funcionarios", funcionarios);
+        model.addAttribute("funcionarios", funcionariosDisponiveis);
         return "equipes/formularioEquipe";
     }
+
 
     @PostMapping("/adicionar/equipe")
     public String adicionarEquipe(@ModelAttribute("equipe") Equipe equipe, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            List<Funcionario> funcionarios = funcionarioRepository.findAll();
-            model.addAttribute("funcionarios", funcionarios);
-            return "redirect:/listar-equipes";
+            List<Funcionario> funcionariosDisponiveis = funcionarioRepository.findAll();
+            model.addAttribute("funcionarios", funcionariosDisponiveis);
+            return "equipes/formularioEquipe";
         }
 
         try {
-            // Obtém o Funcionário pelo ID
-            Funcionario funcionario = funcionarioRepository.findById(equipe.getFuncionario().getId()).orElse(null);
+            if (equipe.getFuncionario() != null && equipe.getFuncionario().getId() != null) {
+                Funcionario funcionario = funcionarioRepository.findById(equipe.getFuncionario().getId())
+                        .orElseThrow(() -> new NoSuchElementException("Funcionário não encontrado"));
 
-            if (funcionario != null) {
-                // Define o Funcionário na Equipe
                 equipe.setFuncionario(funcionario);
-
-                // Salva a Equipe
                 equipeRepository.save(equipe);
-
-                return "redirect:/listar-equipes";
-            } else {
-                model.addAttribute("error", "Funcionário não encontrado. Por favor, selecione um funcionário válido.");
-                List<Funcionario> funcionarios = funcionarioRepository.findAll();
-                model.addAttribute("funcionarios", funcionarios);
                 return "redirect:/listar-equipes";
             }
-        } catch (Exception e) {
+        } catch (DataAccessException e) {
             e.printStackTrace();
             model.addAttribute("error", "Erro ao adicionar a equipe. Por favor, tente novamente.");
-            List<Funcionario> funcionarios = funcionarioRepository.findAll();
-            model.addAttribute("funcionarios", funcionarios);
-            return "equipes/formularioEquipe";
         }
+
+        List<Funcionario> funcionariosDisponiveis = funcionarioRepository.findAll();
+        model.addAttribute("funcionarios", funcionariosDisponiveis);
+        return "equipes/formularioEquipe";
     }
 
     @GetMapping("/listar-equipes")
     public String listarEquipes(Model model) {
         try {
             List<Equipe> equipes = equipeRepository.findAll();
+            List<Funcionario> funcionarios = funcionarioRepository.findAll();
+
+            model.addAttribute("funcionarios", funcionarios);
             model.addAttribute("equipes", equipes);
+
             return "equipes/listaEquipe";
         } catch (Exception e) {
             e.printStackTrace();
