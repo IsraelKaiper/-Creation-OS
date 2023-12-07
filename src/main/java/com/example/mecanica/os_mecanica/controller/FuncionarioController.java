@@ -48,7 +48,7 @@ public class FuncionarioController {
                 if (funcionario.getAdmin() == null) {
                     funcionario.setAdmin(new Login());
                 }
-                funcionario.getAdmin().setId(2L);
+                funcionario.getAdmin().setId(1L);
             }
 
             // Salva o funcionário

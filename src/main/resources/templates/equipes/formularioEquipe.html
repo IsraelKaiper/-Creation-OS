@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Cadastro de Equipe</title>
+</head>
+<body>
+
+<header>
+  <div class="sidebar">
+    <a href="#" title="Página Inicial"><i class="fas fa-home"></i></a>
+    <a href="/adiciona/servico" title="Adicionar Serviço"><i class="fas fa-plus-circle"></i></a>
+    <a href="/listar-veiculos" title="Listar Veículos"><i class="fas fa-car"></i></a>
+    <a href="/listar-funcionarios" title="Listar Funcionários"><i class="fas fa-user"></i></a>
+    <a href="/listar-clientes" title="Listar Clientes"><i class="fas fa-users"></i></a>
+    <a href="/adiciona/equipe" title="Adicionar Equipe"><i class="fas fa-users-cog"></i></a>
+    <a href="/adiciona/peca" title="Adicionar Peça"><i class="fas fa-cogs"></i></a>
+    <a href="contact" title="Contato"><i class="fas fa-envelope"></i></a>
+  </div>
+</header>
+
+<main>
+  <div class="container mt-3">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">Cadastro de Equipes</h2>
+
+        <form action="/adicionar/equipe" method="post" th:object="${equipe}" class="needs-validation" novalidate>
+
+          <!-- Nome da Equipe -->
+          <div class="form-group">
+            <label for="nome">Nome da Equipe:</label>
+            <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+            <div th:if="${#fields.hasErrors('nome')}" th:each="error : ${#fields.errors('nome')}" class="invalid-feedback" th:text="${error}"></div>
+          </div>
+
+          <!-- Função da Equipe -->
+          <div class="form-group">
+            <label for="funcao">Função da Equipe:</label>
+            <input type="text" id="funcao" th:field="*{funcao}" class="form-control" required>
+            <div th:if="${#fields.hasErrors('funcao')}" th:each="error : ${#fields.errors('funcao')}" class="invalid-feedback" th:text="${error}"></div>
+          </div>
+
+          <!-- Seleção do Funcionário -->
+          <div class="form-group">
+            <label for="funcionario">Mecânico:</label>
+            <select id="funcionario" th:field="*{funcionario.id}" class="form-control" required>
+              <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
+            </select>
+          </div>
+
+          <!-- Botão de Envio -->
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+
+        <!-- Se houver erro, exibir mensagem -->
+        <div th:if="${error}" class="alert alert-danger mt-3" role="alert" th:text="${error}"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
