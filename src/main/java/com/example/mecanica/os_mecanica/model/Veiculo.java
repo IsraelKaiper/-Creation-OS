@@ -1,16 +1,9 @@
 package com.example.mecanica.os_mecanica.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -20,16 +13,18 @@ public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String placa;
     private String cor;
     private String modelo;
-    private String ano;
+
+    private Integer ano;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    // Getters e Setters
+    // Getters e Setters...
 
     public Long getId() {
         return id;
@@ -63,11 +58,11 @@ public class Veiculo {
         this.modelo = modelo;
     }
 
-    public String getAno() {
+    public Integer getAno() {
         return ano;
     }
 
-    public void setAno(String ano) {
+    public void setAno(Integer ano) {
         this.ano = ano;
     }
 

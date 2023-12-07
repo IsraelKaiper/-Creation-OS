@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Lista de Veículos</title>
+    <title>Lista de Veículo</title>
 </head>
 <body>
 
 <header>
     <div class="sidebar">
-        <a href="#"><i class="fas fa-home"></i></a>
-        <a href="/adiciona/servico"><i class="fas fa-clipboard-list"></i></a>
-        <a href="/listar-veiculos"><i class="fas fa-car"></i></a>
-        <a href="/listar-clientes"><i class="fas fa-users"></i></a>
-        <a href="/adiciona/equipe"><i class="fas fa-users-cog"></i></a>
-        <a href="/adiciona/peca"><i class="fas fa-cogs"></i></a>
-        <a href="contact"><i class="fas fa-envelope"></i></a>
+        <a href="#" title="Página Inicial"><i class="fas fa-home"></i></a>
+        <a href="/adiciona/servico" title="Adicionar Serviço"><i class="fas fa-plus-circle"></i></a>
+        <a href="/listar-veiculos" title="Listar Veículos"><i class="fas fa-car"></i></a>
+        <a href="/listar-funcionarios" title="Listar Funcionários"><i class="fas fa-user"></i></a>
+        <a href="/listar-clientes" title="Listar Clientes"><i class="fas fa-users"></i></a>
+        <a href="/adiciona/equipe" title="Adicionar Equipe"><i class="fas fa-users-cog"></i></a>
+        <a href="/adiciona/peca" title="Adicionar Peça"><i class="fas fa-cogs"></i></a>
+        <a href="contact" title="Contato"><i class="fas fa-envelope"></i></a>
     </div>
 </header>
 
@@ -25,7 +27,7 @@
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-4">Lista de Veículos</h2>
-            <a href="/adiciona/veiculo" class="btn btn-primary">
+            <a href="/adicionar/veiculo" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Adicionar Veículo
             </a>
         </div>
@@ -37,7 +39,7 @@
                         <p class="card-text">Placa: <span th:text="${veiculo.placa}"></span></p>
                         <p class="card-text">Cor: <span th:text="${veiculo.cor}"></span></p>
                         <p class="card-text">Ano: <span th:text="${veiculo.ano}"></span></p>
-                        <p class="card-text">Cliente: <span th:text="${veiculo.cliente.nome}"></span></p>
+                        <p class="card-text">Proprietário: <span th:text="${veiculo.cliente.nome}"></span></p>
 
                         <!-- Adiciona o botão de exclusão -->
                         <div class="btn-group" role="group">
@@ -57,7 +59,6 @@
         </div>
     </div>
 </main>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

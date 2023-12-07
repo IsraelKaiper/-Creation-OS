@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Editar Cliente</title>
+    <title>Editar Veículo</title>
 </head>
 <body>
 
@@ -20,44 +20,49 @@
         <a href="/adiciona/equipe" title="Adicionar Equipe"><i class="fas fa-users-cog"></i></a>
         <a href="/adiciona/peca" title="Adicionar Peça"><i class="fas fa-cogs"></i></a>
         <a href="contact" title="Contato"><i class="fas fa-envelope"></i></a>
-
     </div>
 </header>
 
 <main>
     <div class="container mt-3">
-        <h2 class="text-center mb-4">Editar Cliente</h2>
-
-        <form class="form-horizontal" th:action="@{'/editar-cliente/' + ${cliente.id}}" method="post" th:object="${cliente}">
-
-            <!-- Campo oculto para o ID do funcionário (visível apenas para fins de edição) -->
-            <input type="hidden" th:field="*{id}" th:unless="${cliente.id == null}" />
+        <h2 class="text-center mb-4">Editar Veículo</h2>
+        <form class="form-horizontal" th:action="@{'/editar-veiculo/' + ${veiculo.id}}" method="post" th:object="${veiculo}">
+            <input type="hidden" th:field="*{id}" />
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nome:</label>
+                <label class="col-sm-2 col-form-label">Placa:</label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{nome}" class="form-control" required />
+                    <input type="text" th:field="*{placa}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">E-mail:</label>
+                <label class="col-sm-2 col-form-label">Cor:</label>
                 <div class="col-sm-10">
-                    <input type="email" th:field="*{email}" class="form-control" required />
+                    <input type="text" th:field="*{cor}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Telefone:</label>
+                <label class="col-sm-2 col-form-label">Modelo:</label>
                 <div class="col-sm-10">
-                    <input type="tel" th:field="*{telefone}" class="form-control" required />
+                    <input type="text" th:field="*{modelo}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Endereço:</label>
+                <label class="col-sm-2 col-form-label">Ano:</label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{endereco}" class="form-control" required />
+                    <input type="number" th:field="*{ano}" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Proprietário:</label>
+                <div class="col-sm-10">
+                    <select th:field="*{cliente.id}" class="form-control" required>
+                        <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
+                    </select>
                 </div>
             </div>
 
@@ -73,5 +78,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

@@ -8,6 +8,10 @@ import java.util.Optional;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    //Método para buscar todos os clientes
+
+    // Método para buscar todos os clientes
     List<Cliente> findAll();
+
+    // Método para buscar cliente por nome
+    Optional<Cliente> findByNome(String nome);
 }
