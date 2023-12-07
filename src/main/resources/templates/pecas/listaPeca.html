@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Lista de Veículo</title>
+    <title>Lista de Peças</title>
 </head>
 <body>
 
@@ -26,31 +26,29 @@
 <main>
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center">
-            <h2 class="mb-4">Lista de Veículos</h2>
-            <a href="/adicionar/veiculo" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Adicionar Veículo
+            <h2 class="mb-4">Lista de Peças</h2>
+            <a href="/adicionar/peca" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Adicionar Peça
             </a>
         </div>
         <div class="row">
-            <div th:each="veiculo : ${veiculos}" class="col-lg-4 col-md-6 mb-4">
+            <div th:each="peca : ${pecas}" class="col-lg-4 col-md-6 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${veiculo.modelo}"></h5>
-                        <p class="card-text">Placa: <span th:text="${veiculo.placa}"></span></p>
-                        <p class="card-text">Cor: <span th:text="${veiculo.cor}"></span></p>
-                        <p class="card-text">Ano: <span th:text="${veiculo.ano}"></span></p>
-                        <p class="card-text">Proprietário: <span th:text="${veiculo.cliente.nome}"></span></p>
+                        <h5 class="card-title" th:text="${peca.nome}"></h5>
+                        <p class="card-text">Quantidade: <span th:text="${peca.quantidade}"></span></p>
+                        <p class="card-text">Valor: <span th:text="${peca.valor}"></span></p>
 
                         <!-- Adiciona o botão de exclusão -->
                         <div class="btn-group" role="group">
-                            <form th:action="@{/excluir-veiculo/{id}(id=${veiculo.id})}" method="post">
+                            <form th:action="@{/excluir-peca/{id}(id=${peca.id})}" method="post">
                                 <button type="submit" class="btn btn-secondary">Excluir</button>
                             </form>
                         </div>
 
                         <!-- Adiciona o botão de edição -->
                         <div class="btn-group" role="group">
-                            <a th:href="@{/editar-veiculo/{id}(id=${veiculo.id})}" class="btn btn-primary">Editar</a>
+                            <a th:href="@{/editar-peca/{id}(id=${peca.id})}" class="btn btn-primary">Editar</a>
                         </div>
 
                     </div>
