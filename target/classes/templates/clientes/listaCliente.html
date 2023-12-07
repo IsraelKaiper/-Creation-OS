@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Lista de Clientes</title>
+</head>
+
+<body>
+
+<header>
+    <div class="sidebar">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <a href="/adiciona/servico"><i class="fas fa-clipboard-list"></i></a>
+        <a href="/listar-veiculos"><i class="fas fa-car"></i></a>
+        <a href="/listar-clientes"><i class="fas fa-users"></i></a>
+        <a href="/adiciona/equipe"><i class="fas fa-users-cog"></i></a>
+        <a href="/adiciona/peca"><i class="fas fa-cogs"></i></a>
+        <a href="contact"><i class="fas fa-envelope"></i></a>
+    </div>
+</header>
+
+<main>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-4">Lista de Clientes</h2>
+            <a href="/adiciona/cliente" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Adicionar Cliente
+            </a>
+        </div>
+        <div class="row">
+            <div th:each="cliente : ${clientes}" class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${cliente.nome}"></h5>
+                        <p class="card-text">Código: <span th:text="${cliente.id}"></span></p>
+                        <p class="card-text">Email: <span th:text="${cliente.email}"></span></p>
+                        <p class="card-text">Telefone: <span th:text="${cliente.telefone}"></span></p>
+                        <p class="card-text">Endereço: <span th:text="${cliente.endereco}"></span></p>
+
+                        <!-- Adiciona o botão de exclusão -->
+                        <div class="btn-group" role="group">
+                            <form th:action="@{/excluir-cliente/{id}(id=${cliente.id})}" method="post">
+                                <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                        </div>
+
+                        <!-- Adiciona o botão de edição -->
+                        <div class="btn-group" role="group">
+                            <a th:href="@{/editar-cliente/{id}(id=${cliente.id})}" class="btn btn-primary">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

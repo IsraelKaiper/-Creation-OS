@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Adiciona os arquivos do Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Cadastro Cliente</title>
+</head>
+<body>
+<header>
+    <div class="sidebar">
+        <a href="#"><i class="fas fa-home"></i></a>
+        <a href="/adiciona/servico"><i class="fas fa-clipboard-list"></i></a>
+        <a href="/listar-veiculos"><i class="fas fa-car"></i></a>
+        <a href="/listar-clientes"><i class="fas fa-users"></i></a>
+        <a href="/adiciona/equipe"><i class="fas fa-users-cog"></i></a>
+        <a href="/adiciona/peca"><i class="fas fa-cogs"></i></a>
+        <a href="contact"><i class="fas fa-envelope"></i></a>
+    </div>
+</header>
+
+<main>
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center mb-4">Cadastro de Clientes</h2>
+
+                <form action="/adiciona/cliente" method="post" th:object="${cliente}" class="needs-validation" novalidate>
+
+                    <!-- Nome -->
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
+                        <div th:if="${#fields.hasErrors('nome')}" th:each="error : ${#fields.errors('nome')}" class="invalid-feedback" th:text="${error}"></div>
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" th:field="*{email}" class="form-control" required>
+                        <div th:if="${#fields.hasErrors('email')}" th:each="error : ${#fields.errors('email')}" class="invalid-feedback" th:text="${error}"></div>
+                    </div>
+
+                    <!-- Telefone -->
+                    <div class="form-group">
+                        <label for="telefone">Telefone:</label>
+                        <input type="text" id="telefone" th:field="*{telefone}" class="form-control">
+                        <!-- Adicione aqui o código semelhante para o campo telefone -->
+                    </div>
+
+                    <!-- Endereço -->
+                    <div class="form-group">
+                        <label for="endereco">Endereço:</label>
+                        <input type="text" id="endereco" th:field="*{endereco}" class="form-control">
+                    </div>
+
+                    <!-- Botão de Envio -->
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Adiciona os scripts do Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
