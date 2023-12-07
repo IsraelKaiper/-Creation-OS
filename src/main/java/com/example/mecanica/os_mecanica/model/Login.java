@@ -32,4 +32,8 @@ public class Login {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Object getId() {
+        return id;
+    }
 }

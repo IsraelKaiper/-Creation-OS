@@ -17,22 +17,22 @@
         <a href="/listar-veiculos" title="Listar Veículos"><i class="fas fa-car"></i></a>
         <a href="/listar-funcionarios" title="Listar Funcionários"><i class="fas fa-user"></i></a>
         <a href="/listar-clientes" title="Listar Clientes"><i class="fas fa-users"></i></a>
-        <a href="/adiciona/equipe" title="Adicionar Equipe"><i class="fas fa-users-cog"></i></a>
-        <a href="/adiciona/peca" title="Adicionar Peça"><i class="fas fa-cogs"></i></a>
+        <a href="/listar-equipes" title="Adicionar Equipe"><i class="fas fa-users-cog"></i></a>
+        <a href="/listar-pecas" title="Adicionar Peça"><i class="fas fa-cogs"></i></a>
         <a href="contact" title="Contato"><i class="fas fa-envelope"></i></a>
-
     </div>
 </header>
 
 <main>
     <div class="container mt-3">
         <h2 class="text-center mb-4">Editar Funcionário</h2>
+
         <form class="form-horizontal" th:action="@{'/editar-funcionario/' + ${funcionario.id}}" method="post" th:object="${funcionario}">
             <!-- Campo oculto para o ID do admin -->
             <input type="hidden" th:field="*{id}" th:if="${funcionario.id == null}" th:value="${idDoAdminFixo}" />
 
-            <!-- Campo oculto para o ID do funcionário (visível apenas para fins de edição) -->
-            <input type="hidden" th:field="*{id}" th:unless="${funcionario.id == null}" />
+            <!-- Campo oculto para o ID do funcionário -->
+            <input type="hidden" th:field="*{id}" />
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nome:</label>

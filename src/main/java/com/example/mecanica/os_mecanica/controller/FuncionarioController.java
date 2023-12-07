@@ -124,8 +124,20 @@ public class FuncionarioController {
             }
 
             Funcionario funcionarioAtual = funcionarioExistente.get();
-            // Copia as propriedades do funcionário recebido para o funcionário existente
-            BeanUtils.copyProperties(funcionario, funcionarioAtual, "id");
+
+            // Mantém o admin_id existente no funcionário atualizado
+            funcionarioAtual.setAdmin(funcionarioExistente.get().getAdmin());
+
+            // Se é um novo funcionário, define o admin_id fixo como 1
+            if (funcionarioAtual.getAdmin() == null || funcionarioAtual.getAdmin().getId() == null) {
+                if (funcionarioAtual.getAdmin() == null) {
+                    funcionarioAtual.setAdmin(new Login());
+                }
+                funcionarioAtual.getAdmin().setId(1L);
+            }
+
+            // Copia as outras propriedades do funcionário recebido para o funcionário existente
+            BeanUtils.copyProperties(funcionario, funcionarioAtual, "id", "admin");
 
             // Salva as alterações do funcionário
             funcionarioRepository.save(funcionarioAtual);
