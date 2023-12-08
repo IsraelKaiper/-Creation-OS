@@ -136,11 +136,13 @@
 
             <div class="form-group">
                 <label for="pecas">Peças:</label>
-                <select multiple class="form-control" id="pecas" th:field="*{pecas}" th:val="${serviceOrder.pecas}"></select>
+                <select multiple class="form-control" id="pecas" th:field="*{pecas}">
+                    <option th:each="peca : ${pecas}" th:value="${peca.id}" th:text="${peca.nome}"
+                            th:selected="${serviceOrder.pecas.contains(peca)}"></option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
-
     </div>
 </main>
