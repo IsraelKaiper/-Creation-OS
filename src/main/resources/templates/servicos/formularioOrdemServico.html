@@ -100,6 +100,13 @@
                         <div th:if="${#fields.hasErrors('defeito')}" th:each="error : ${#fields.errors('defeito')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
+                    <!-- Tipo de Serviço -->
+                    <div class="form-group">
+                        <label for="tipo_servico">Defeito:</label>
+                        <input type="text" id="tipo_servico" th:field="*{tipo_servico}" class="form-control" required>
+                        <div th:if="${#fields.hasErrors('tipo_servico')}" th:each="error : ${#fields.errors('tipo_servico')}" class="invalid-feedback" th:text="${error}"></div>
+                    </div>
+
                     <!-- Data de Entrada -->
                     <div class="form-group">
                         <label for="data_entrada">Data de Entrada:</label>
@@ -144,6 +151,13 @@
                         <select id="veiculo" th:field="*{veiculo.id}" class="form-control" required>
                             <option th:each="veiculo : ${veiculos}" th:value="${veiculo.id}" th:text="${veiculo.placa}"></option>
                         </select>
+                    </div>
+
+                    <!-- Total da compra -->
+                    <div class="form-group">
+                        <label for="total">Custo Total:</label>
+                        <input type="number" id="total" th:field="*{total}" class="form-control" required>
+                        <div th:if="${#fields.hasErrors('total')}" th:each="error : ${#fields.errors('total')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Botão de Envio -->

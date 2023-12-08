@@ -26,6 +26,9 @@ public class ServiceOrder {
 
     private LocalDate  data_saida;
 
+    private Double total;
+
+    private String tipo_servico;
     @ManyToOne
     @JoinColumn(name = "equipe_id")
     private Equipe equipe;
