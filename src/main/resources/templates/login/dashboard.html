@@ -7,90 +7,132 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/sideBar.css" />
-    <title>Lista de Funcionários</title>
+    <title>Ordem de Serviço</title>
 </head>
 <body>
 
-    <section class="sidebar">
-        <div class="nav-header">
-            <p class="logo">Order Service</p>
-            <i class="fas fa-bars btn-menu"></i>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="#" title="/dashboard">
-                    <i class="fas fa-home"></i>
-                    <span class="title">Home</span>
-                </a>
-                <span class="tooltip">Home</span>
-            </li>
-            <li>
-                <a href="/adicionar/servico" title="Adicionar Serviço">
-                    <i class="fas fa-plus-circle"></i>
-                    <span class="title">Adicionar Serviço</span>
-                </a>
-                <span class="tooltip">Adicionar Serviço</span>
-            </li>
-            <li>
-                <a href="/listar-veiculos" title="Listar Veículos">
-                    <i class="fas fa-car"></i>
-                    <span class="title">Listar Veículos</span>
-                </a>
-                <span class="tooltip">Listar Veículos</span>
-            </li>
-            <li>
-                <a href="/listar-funcionarios" title="Listar Funcionários">
-                    <i class="fas fa-user"></i>
-                    <span class="title">Listar Funcionários</span>
-                </a>
-                <span class="tooltip">Listar Funcionários</span>
-            </li>
-            <li>
-                <a href="/listar-clientes" title="Listar Clientes">
-                    <i class="fas fa-users"></i>
-                    <span class="title">Listar Clientes</span>
-                </a>
-                <span class="tooltip">Listar Clientes</span>
-            </li>
-            <li>
-                <a href="/listar-equipes" title="Adicionar Equipe">
-                    <i class="fas fa-users-cog"></i>
-                    <span class="title">Adicionar Equipe</span>
-                </a>
-                <span class="tooltip">Adicionar Equipe</span>
-            </li>
-            <li>
-                <a href="/listar-pecas" title="Adicionar Peça">
-                    <i class="fas fa-cogs"></i>
-                    <span class="title">Adicionar Peça</span>
-                </a>
-                <span class="tooltip">Adicionar Peça</span>
-            </li>
-            <li>
-                <a href="contact" title="Contato">
-                    <i class="fas fa-envelope"></i>
-                    <span class="title">Contato</span>
-                </a>
-                <span class="tooltip">Contato</span>
-            </li>
-        </ul>
-    </section>
-
 <main>
-    <div class="container mt-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <h2 class="mb-4">Ordem de Servico</h2>
-        </div>
+<section class="sidebar">
+    <div class="nav-header">
+        <p class="logo">Ordem de Serviço</p>
+        <i class="fas fa-bars btn-menu"></i>
+    </div>
+    <ul class="nav-links">
+        <li>
+            <a href="#" title="/dashboard">
+                <i class="fas fa-home"></i>
+                <span class="title">Home</span>
+            </a>
+            <span class="tooltip">Home</span>
+        </li>
+        <li>
+            <a href="/adicionar/servico" title="Adicionar Serviço">
+                <i class="fas fa-plus-circle"></i>
+                <span class="title">Adicionar Serviço</span>
+            </a>
+            <span class="tooltip">Adicionar Serviço</span>
+        </li>
+        <li>
+            <a href="/listar-veiculos" title="Listar Veículos">
+                <i class="fas fa-car"></i>
+                <span class="title">Listar Veículos</span>
+            </a>
+            <span class="tooltip">Listar Veículos</span>
+        </li>
+        <li>
+            <a href="/listar-funcionarios" title="Listar Funcionários">
+                <i class="fas fa-user"></i>
+                <span class="title">Listar Funcionários</span>
+            </a>
+            <span class="tooltip">Listar Funcionários</span>
+        </li>
+        <li>
+            <a href="/listar-clientes" title="Listar Clientes">
+                <i class="fas fa-users"></i>
+                <span class="title">Listar Clientes</span>
+            </a>
+            <span class="tooltip">Listar Clientes</span>
+        </li>
+        <li>
+            <a href="/listar-equipes" title="Adicionar Equipe">
+                <i class="fas fa-users-cog"></i>
+                <span class="title">Adicionar Equipe</span>
+            </a>
+            <span class="tooltip">Adicionar Equipe</span>
+        </li>
+        <li>
+            <a href="/listar-pecas" title="Adicionar Peça">
+                <i class="fas fa-cogs"></i>
+                <span class="title">Adicionar Peça</span>
+            </a>
+            <span class="tooltip">Adicionar Peça</span>
+        </li>
+        <li>
+            <a href="contact" title="Contato">
+                <i class="fas fa-envelope"></i>
+                <span class="title">Contato</span>
+            </a>
+            <span class="tooltip">Contato</span>
+        </li>
+    </ul>
+</section>
 
-
+        <div class="container mt-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="mb-4">Lista de Ordens de Serviço</h2>
+                <!-- Adicione o link para adicionar uma nova ordem de serviço, se necessário -->
             </div>
+            <!-- Exibição de mensagem de erro -->
+            <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Solução</th>
+                        <th>Defeito</th>
+                        <th>Data de Entrada</th>
+                        <th>Data de Saída</th>
+                        <th>Equipe</th>
+                        <th>Cliente</th>
+                        <th>Veículo</th>
+                        <th>Peças</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Loop through your list of ServiceOrders and create a row for each -->
+                    <tr th:each="serviceOrder : ${serviceOrders}">
+                        <td th:text="${serviceOrder.id}"></td>
+                        <td th:text="${serviceOrder.solucao}"></td>
+                        <td th:text="${serviceOrder.defeito}"></td>
+                        <td th:text="${#temporals.format(serviceOrder.data_entrada, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${#temporals.format(serviceOrder.data_saida, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${serviceOrder.equipe.nome}"></td>
+                        <td th:text="${serviceOrder.cliente.nome}"></td>
+                        <td th:text="${serviceOrder.veiculo.placa}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></li>
+                            </ul>
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de exclusão -->
+                                <form th:action="@{/excluir-servico/{id}(id=${serviceOrder.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                </form>
+
+                                <!-- Adicione o botão de edição -->
+                                <a th:href="@{/editar-servico/{id}(id=${serviceOrder.id})}" class="btn btn-primary">Editar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
         </div>
-    </div>
-    </div>
-    </div>
 </main>
-
-
 </body>
 <script>
     const btn_menu = document.querySelector(".btn-menu");
@@ -109,6 +151,7 @@
       }
     }
 </script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

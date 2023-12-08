@@ -29,6 +29,7 @@ public class OrderServiceController {
     private final VeiculoRepository veiculoRepository;
     private final PecaRepository pecaRepository;
 
+    @Autowired
     public OrderServiceController(ServiceOrderRepository serviceOrderRepository,
                                   EquipeRepository equipeRepository,
                                   ClienteRepository clienteRepository,
@@ -112,12 +113,17 @@ public class OrderServiceController {
     public String listarOrdensServico(Model model) {
         try {
             List<ServiceOrder> serviceOrders = serviceOrderRepository.findAll();
-            model.addAttribute("serviceOrders", serviceOrders);
-            return "login/dashboard";
+            if (serviceOrders.isEmpty()) {
+                model.addAttribute("error", "Não há ordens de serviço para exibir.");
+            } else {
+                model.addAttribute("serviceOrders", serviceOrders);
+            }
+            return"login/dashboard";
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Ocorreu um erro ao recuperar a lista de ordens de serviço. Por favor, tente novamente.");
             return "erro";
         }
     }
+
 }
