@@ -88,14 +88,19 @@
         </div>
         <div class="row">
             <div th:each="funcionario : ${funcionarios}" class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
+                <div class="card" th:classappend="${funcionario.ativo == false} ? 'card-suspenso' : ''">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${funcionario.nome}"></h5>
                         <p class="card-text">Código: <span th:text="${funcionario.id}"></span></p>
+                        <p class="card-text">Cpf: <span th:text="${funcionario.cpf}"></span></p>
+                        <p class="card-text">Rg: <span th:text="${funcionario.rg}"></span></p>
                         <p class="card-text">Email: <span th:text="${funcionario.email}"></span></p>
                         <p class="card-text">Telefone: <span th:text="${funcionario.telefone}"></span></p>
                         <p class="card-text">Endereço: <span th:text="${funcionario.endereco}"></span></p>
-                        <p class="card-text">Status: <span th:text="${funcionario.ativo == true ? 'Ativo' : 'Suspenso'}"></span></p>
+                        <!-- Adiciona a faixa "Suspenso" quando o funcionário está suspenso -->
+                        <div th:if="${funcionario.ativo == false}" class="card-suspenso-text">
+                            Suspenso
+                        </div>
 
                         <!-- Adiciona o botão de exclusão -->
                         <div class="btn-group" role="group">
@@ -110,6 +115,9 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+            </div>
             </div>
         </div>
     </div>

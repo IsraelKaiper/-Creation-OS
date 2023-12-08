@@ -17,11 +17,8 @@ public class Peca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String quantidade;
-    private String valor;
-
-   /* @ManyToMany(mappedBy = "peca")
-    private Set<OrdemServico> ordensServico = new HashSet<>();*/
+    private Integer quantidade;
+    private Float valor;
 
     public Peca() {
     }
@@ -44,27 +41,19 @@ public class Peca {
         this.nome = nome;
     }
 
-    public String getQuantidade() {
+    public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(String quantidade) {
+    public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
 
-    public String getValor() {
+    public Float getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(Float valor) {
         this.valor = valor;
     }
-
-   /* public Set<OrdemServico> getOrdensServico() {
-        return ordensServico;
-    }*/
-
-   /* public void setOrdensServico(Set<OrdemServico> ordensServico) {
-        this.ordensServico = ordensServico;
-    }*/
 }

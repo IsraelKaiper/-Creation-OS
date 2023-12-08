@@ -86,6 +86,16 @@
 
                 <form action="/adicionar/peca" method="post" th:object="${peca}" class="needs-validation" novalidate>
 
+                    <!-- Adicione esta parte para exibir mensagens de erro -->
+                    <div th:if="${error}" class="alert alert-danger" role="alert">
+                        <p th:text="${error}"></p>
+                    </div>
+
+                    <!-- Adicione esta parte para exibir mensagens de sucesso -->
+                    <div th:if="${success}" class="alert alert-success" role="alert">
+                        <p th:text="${success}"></p>
+                    </div>
+
                     <!-- Nome -->
                     <div class="form-group">
                         <label for="nome">Nome:</label>
@@ -96,23 +106,20 @@
                     <!-- Quantidade -->
                     <div class="form-group">
                         <label for="quantidade">Quantidade:</label>
-                        <input type="text" id="quantidade" th:field="*{quantidade}" class="form-control" required>
+                        <input type="number" id="quantidade" th:field="*{quantidade}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('quantidade')}" th:each="error : ${#fields.errors('quantidade')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Valor -->
                     <div class="form-group">
                         <label for="valor">Valor:</label>
-                        <input type="text" id="valor" th:field="*{valor}" class="form-control" required>
+                        <input type="number" id="valor" th:field="*{valor}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('valor')}" th:each="error : ${#fields.errors('valor')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Botão de Envio -->
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </form>
-
-                <!-- Se houver erro, exibir mensagem -->
-                <div th:if="${error}" class="alert alert-danger mt-3" role="alert" th:text="${error}"></div>
             </div>
         </div>
     </div>

@@ -8,6 +8,9 @@
   --color-hover: rgba(32, 59, 232);
   --transition: all 0.2s ease;
 }
+header{
+    background-color: #000;
+}
 
 :root {
   --color-white: #fff;

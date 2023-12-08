@@ -22,7 +22,8 @@ public class Funcionario {
     private String email;
     private String telefone;
     private String endereco;
-
+    private String rg;
+    private String cpf;
     private boolean ativo = true;
 
     @ManyToOne
@@ -35,7 +36,7 @@ public class Funcionario {
     public Funcionario() {
     }
 
-    // Getters e Setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -77,6 +78,22 @@ public class Funcionario {
         this.endereco = endereco;
     }
 
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public boolean isAtivo() {
         return ativo;
     }
@@ -93,7 +110,11 @@ public class Funcionario {
         this.admin = admin;
     }
 
-    public boolean hasEquipes() {
-        return equipes != null && !equipes.isEmpty();
+    public List<Equipe> getEquipes() {
+        return equipes;
+    }
+
+    public void setEquipes(List<Equipe> equipes) {
+        this.equipes = equipes;
     }
 }

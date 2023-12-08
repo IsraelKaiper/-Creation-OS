@@ -110,8 +110,8 @@
                     <!-- Ano -->
                     <div class="form-group">
                         <label for="ano">Ano:</label>
-                        <select id="ano" th:field="*{ano}" class="form-control" required>
-                            <option th:each="year : ${#numbers.sequence(1700, 2100)}" th:value="${year}" th:text="${year}"></option>
+                        <select id="ano" name="ano" class="form-control" required>
+                            <!-- JavaScript para popular o dropdown com anos -->
                         </select>
                         <div th:if="${#fields.hasErrors('ano')}" th:each="error : ${#fields.errors('ano')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
@@ -152,6 +152,16 @@
       } else {
         btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
       }
+    }
+      // JavaScript para popular o dropdown com anos
+    var selectAno = document.getElementById('ano');
+    var anoAtual = new Date().getFullYear();
+
+    for (var ano = 1800; ano <= 2100; ano++) {
+        var option = document.createElement('option');
+        option.value = ano;
+        option.text = ano;
+        selectAno.appendChild(option);
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

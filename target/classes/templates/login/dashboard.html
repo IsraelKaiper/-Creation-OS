@@ -79,9 +79,49 @@
     </section>
 </header>
 
-<section class="home">
-    <p>Home Content Here</p>
-</section>
+<main>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="col-md-10">
+                <h2 class="text-center mb-4">Lista de Ordens de Serviço</h2>
+
+                <!-- Tabela para listar as ordens de serviço -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Solução</th>
+                        <th>Defeito</th>
+                        <th>Data de Entrada</th>
+                        <th>Data de Saída</th>
+                        <th>Equipe Responsável</th>
+                        <th>Proprietário</th>
+                        <th>Veículo</th>
+                        <th>Peças</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Iteração sobre as ordens de serviço -->
+                    <tr th:each="ordem : ${ordens}">
+                        <td th:text="${ordem.id}"></td>
+                        <td th:text="${ordem.solucao}"></td>
+                        <td th:text="${ordem.defeito}"></td>
+                        <td th:text="${ordem.dataEntrada}"></td>
+                        <td th:text="${ordem.dataSaida}"></td>
+                        <td th:text="${ordem.equipe.nome}"></td>
+                        <td th:text="${ordem.cliente.nome}"></td>
+                        <td th:text="${ordem.veiculo.modelo}"></td>
+                        <td>
+                            <!-- Iteração sobre as peças da ordem de serviço -->
+                            <span th:each="peca : ${ordem.pecas}" th:text="${peca.nome} + ', '"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
 
 <script>
     const btn_menu = document.querySelector(".btn-menu");
