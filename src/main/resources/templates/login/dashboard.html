@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Side Navbar - Tivotal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/sideBar.css" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"  rel="stylesheet"/>
+    <title>Lista de Funcionários</title>
 </head>
-
 <body>
 
-<header>
     <section class="sidebar">
         <div class="nav-header">
             <p class="logo">Order Service</p>
@@ -20,14 +18,14 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="#" title="Página Inicial">
+                <a href="#" title="/dashboard">
                     <i class="fas fa-home"></i>
                     <span class="title">Home</span>
                 </a>
                 <span class="tooltip">Home</span>
             </li>
             <li>
-                <a href="/adiciona/servico" title="Adicionar Serviço">
+                <a href="/adicionar/servico" title="Adicionar Serviço">
                     <i class="fas fa-plus-circle"></i>
                     <span class="title">Adicionar Serviço</span>
                 </a>
@@ -77,52 +75,23 @@
             </li>
         </ul>
     </section>
-</header>
 
 <main>
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center">
-            <div class="col-md-10">
-                <h2 class="text-center mb-4">Lista de Ordens de Serviço</h2>
+            <h2 class="mb-4">Ordem de Servico</h2>
+        </div>
 
-                <!-- Tabela para listar as ordens de serviço -->
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Solução</th>
-                        <th>Defeito</th>
-                        <th>Data de Entrada</th>
-                        <th>Data de Saída</th>
-                        <th>Equipe Responsável</th>
-                        <th>Proprietário</th>
-                        <th>Veículo</th>
-                        <th>Peças</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Iteração sobre as ordens de serviço -->
-                    <tr th:each="ordem : ${ordens}">
-                        <td th:text="${ordem.id}"></td>
-                        <td th:text="${ordem.solucao}"></td>
-                        <td th:text="${ordem.defeito}"></td>
-                        <td th:text="${ordem.dataEntrada}"></td>
-                        <td th:text="${ordem.dataSaida}"></td>
-                        <td th:text="${ordem.equipe.nome}"></td>
-                        <td th:text="${ordem.cliente.nome}"></td>
-                        <td th:text="${ordem.veiculo.modelo}"></td>
-                        <td>
-                            <!-- Iteração sobre as peças da ordem de serviço -->
-                            <span th:each="peca : ${ordem.pecas}" th:text="${peca.nome} + ', '"></span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+
             </div>
         </div>
     </div>
+    </div>
+    </div>
 </main>
 
+
+</body>
 <script>
     const btn_menu = document.querySelector(".btn-menu");
     const side_bar = document.querySelector(".sidebar");
@@ -140,5 +109,7 @@
       }
     }
 </script>
-</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </html>

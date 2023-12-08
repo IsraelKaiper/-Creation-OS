@@ -29,7 +29,6 @@ public class OrderServiceController {
     private final VeiculoRepository veiculoRepository;
     private final PecaRepository pecaRepository;
 
-    @Autowired
     public OrderServiceController(ServiceOrderRepository serviceOrderRepository,
                                   EquipeRepository equipeRepository,
                                   ClienteRepository clienteRepository,
@@ -120,100 +119,5 @@ public class OrderServiceController {
             model.addAttribute("error", "Ocorreu um erro ao recuperar a lista de ordens de serviço. Por favor, tente novamente.");
             return "erro";
         }
-    }
-
-    @GetMapping("/editar-ordem-servico/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
-        try {
-            ServiceOrder serviceOrder = serviceOrderRepository.findById(id)
-                    .orElseThrow(() -> new IllegalArgumentException("Ordem de Serviço inválida: " + id));
-
-            List<Equipe> equipes = equipeRepository.findAll();
-            List<Cliente> clientes = clienteRepository.findAll();
-            List<Veiculo> veiculos = veiculoRepository.findAll();
-            List<Peca> pecas = pecaRepository.findAll();
-
-            model.addAttribute("serviceOrder", serviceOrder);
-            model.addAttribute("equipes", equipes);
-            model.addAttribute("clientes", clientes);
-            model.addAttribute("veiculos", veiculos);
-            model.addAttribute("pecas", pecas);
-
-            return "servicos/formularioOrdemServico";
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("error", "Erro ao carregar ordem de serviço para edição. Por favor, tente novamente.");
-            return "erro";
-        }
-    }
-
-    @PostMapping("/editar-ordem-servico/{id}")
-    public String editarOrdemServico(@PathVariable Long id,
-                                     @ModelAttribute("serviceOrder") ServiceOrder serviceOrder,
-                                     BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            List<Equipe> equipes = equipeRepository.findAll();
-            List<Cliente> clientes = clienteRepository.findAll();
-            List<Veiculo> veiculos = veiculoRepository.findAll();
-            List<Peca> pecas = pecaRepository.findAll();
-
-            model.addAttribute("equipes", equipes);
-            model.addAttribute("clientes", clientes);
-            model.addAttribute("veiculos", veiculos);
-            model.addAttribute("pecas", pecas);
-
-            return "redirect:/listar-servico";
-        }
-
-        try {
-            Equipe equipe = equipeRepository.findById(serviceOrder.getEquipe().getId()).orElse(null);
-            Cliente cliente = clienteRepository.findById(serviceOrder.getCliente().getId()).orElse(null);
-            Veiculo veiculo = veiculoRepository.findById(serviceOrder.getVeiculo().getId()).orElse(null);
-
-            if (equipe != null && cliente != null && veiculo != null) {
-                serviceOrder.setEquipe(equipe);
-                serviceOrder.setCliente(cliente);
-                serviceOrder.setVeiculo(veiculo);
-
-                serviceOrderRepository.save(serviceOrder);
-
-                return "redirect:/listar-servico";
-            } else {
-                model.addAttribute("error", "Equipe, Cliente ou Veículo não encontrado. Por favor, selecione valores válidos.");
-                List<Equipe> equipes = equipeRepository.findAll();
-                List<Cliente> clientes = clienteRepository.findAll();
-                List<Veiculo> veiculos = veiculoRepository.findAll();
-                List<Peca> pecas = pecaRepository.findAll();
-
-                model.addAttribute("equipes", equipes);
-                model.addAttribute("clientes", clientes);
-                model.addAttribute("veiculos", veiculos);
-                model.addAttribute("pecas", pecas);
-
-                return "redirect:/listar-servico";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("error", "Erro ao editar ordem de serviço. Por favor, tente novamente.");
-            return "ordem-servico/formularioEditarOrdemServico";
-        }
-    }
-
-    @PostMapping("/excluir-ordem-servico/{id}")
-    public String excluirOrdemServico(@PathVariable Long id) {
-        try {
-            serviceOrderRepository.deleteById(id);
-            return "redirect:/listar-servico";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "erro";
-        }
-    }
-
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception e, Model model) {
-        e.printStackTrace();
-        model.addAttribute("error", "Ocorreu um erro inesperado. Por favor, tente novamente.");
-        return "erro";
     }
 }
