@@ -27,15 +27,15 @@ public class ServiceOrder {
     private LocalDate  data_saida;
 
     @ManyToOne
-    @JoinColumn(name = "equipe_id", nullable = false)
+    @JoinColumn(name = "equipe_id")
     private Equipe equipe;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "veiculo_id", nullable = false)
+    @JoinColumn(name = "veiculo_id")
     private Veiculo veiculo;
 
     @ManyToMany
@@ -45,8 +45,6 @@ public class ServiceOrder {
             inverseJoinColumns = @JoinColumn(name = "peca_id")
     )
     private Set<Peca> pecas = new HashSet<>();
-
-    // Getters e Setters...
 
     public Long getId() {
         return id;

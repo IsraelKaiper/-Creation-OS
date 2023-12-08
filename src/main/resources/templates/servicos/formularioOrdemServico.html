@@ -84,29 +84,19 @@
             <div class="col-md-6">
                 <h2 class="text-center mb-4">Cadastro de Ordem de Serviço</h2>
 
-                <form action="/adicionar/servico" method="post" th:object="${serviceOrder}" class="needs-validation" novalidate>
-
-                    <!-- Adicione esta parte para exibir mensagens de erro -->
-                    <div th:if="${error}" class="alert alert-danger" role="alert">
-                        <p th:text="${error}"></p>
-                    </div>
-
-                    <!-- Adicione esta parte para exibir mensagens de sucesso -->
-                    <div th:if="${success}" class="alert alert-success" role="alert">
-                        <p th:text="${success}"></p>
-                    </div>
+                <form action="/adiciona/servico" method="post" th:object="${serviceOrder}" class="needs-validation" novalidate>
 
                     <!-- Solução -->
                     <div class="form-group">
                         <label for="solucao">Solução:</label>
-                        <textarea id="solucao" th:field="*{solucao}" class="form-control" required></textarea>
+                        <input type="text" id="solucao" th:field="*{solucao}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('solucao')}" th:each="error : ${#fields.errors('solucao')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Defeito -->
                     <div class="form-group">
                         <label for="defeito">Defeito:</label>
-                        <textarea  id="defeito" th:field="*{defeito}" class="form-control" required></textarea>
+                        <input type="text" id="defeito" th:field="*{defeito}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('defeito')}" th:each="error : ${#fields.errors('defeito')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
@@ -120,69 +110,62 @@
                     <!-- Data de Saída -->
                     <div class="form-group">
                         <label for="data_saida">Data de Saída:</label>
-                        <input type="date" id="data_saida" th:field="*{data_saida}" class="form-control">
+                        <input type="date" id="data_saida" th:field="*{data_saida}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('data_saida')}" th:each="error : ${#fields.errors('data_saida')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
-                    <!-- Equipe -->
+                    <!-- Seleção das Peças -->
+                    <div class="form-group">
+                        <label for="pecas">Peças:</label>
+                        <select id="pecas" th:field="*{pecas}" class="form-control" multiple required>
+                            <option th:each="peca : ${pecas}" th:value="${peca.id}" th:text="${peca.nome}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Seleção da Equipe -->
                     <div class="form-group">
                         <label for="equipe">Equipe:</label>
                         <select id="equipe" th:field="*{equipe.id}" class="form-control" required>
-                            <option th:each="e : ${equipes}" th:value="${e.id}" th:text="${e.nome}"></option>
+                            <option th:each="equipe : ${equipes}" th:value="${equipe.id}" th:text="${equipe.nome}"></option>
                         </select>
-                        <div th:if="${#fields.hasErrors('equipe.id')}" th:each="error : ${#fields.errors('equipe.id')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
-                    <!-- Cliente -->
+                    <!-- Seleção do Cliente -->
                     <div class="form-group">
                         <label for="cliente">Cliente:</label>
                         <select id="cliente" th:field="*{cliente.id}" class="form-control" required>
-                            <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
+                            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
                         </select>
-                        <div th:if="${#fields.hasErrors('cliente.id')}" th:each="error : ${#fields.errors('cliente.id')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
-                    <!-- Veículo -->
+                    <!-- Seleção do Veículo -->
                     <div class="form-group">
                         <label for="veiculo">Veículo:</label>
                         <select id="veiculo" th:field="*{veiculo.id}" class="form-control" required>
-                            <option th:each="v : ${veiculos}" th:value="${v.id}" th:text="${v.modelo}"></option>
+                            <option th:each="veiculo : ${veiculos}" th:value="${veiculo.id}" th:text="${veiculo.placa}"></option>
                         </select>
-                        <div th:if="${#fields.hasErrors('veiculo.id')}" th:each="error : ${#fields.errors('veiculo.id')}" class="invalid-feedback" th:text="${error}"></div>
-                    </div>
-
-                    <!-- Peças (N:N relationship) -->
-                    <div class="form-group">
-                        <label for="pecas">Peças:</label>
-                        <select id="pecas" th:field="*{pecas}" class="form-control" multiple>
-                            <option th:each="peca : ${pecas}" th:value="${peca.id}" th:text="${peca.nome}"></option>
-                        </select>
-                        <div th:if="${#fields.hasErrors('pecas')}" th:each="error : ${#fields.errors('pecas')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Botão de Envio -->
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </form>
+
+                <!-- Exibição de mensagem de erro -->
+                <div th:if="${error}" class="alert alert-danger mt-3" role="alert" th:text="${error}"></div>
             </div>
         </div>
     </div>
 </main>
-
 <script>
-    const btn_menu = document.querySelector(".btn-menu");
-    const side_bar = document.querySelector(".sidebar");
+    // JavaScript para popular o dropdown com anos
+    var selectAno = document.getElementById('ano');
+    var anoAtual = new Date().getFullYear();
 
-    btn_menu.addEventListener("click", function () {
-      side_bar.classList.toggle("expand");
-      changebtn();
-    });
-
-    function changebtn() {
-      if (side_bar.classList.contains("expand")) {
-        btn_menu.classList.replace("bx-menu", "bx-menu-alt-right");
-      } else {
-        btn_menu.classList.replace("bx-menu-alt-right", "bx-menu");
-      }
+    for (var ano = 1800; ano <= 2100; ano++) {
+        var option = document.createElement('option');
+        option.value = ano;
+        option.text = ano;
+        selectAno.appendChild(option);
     }
 </script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
