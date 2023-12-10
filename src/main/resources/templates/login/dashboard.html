@@ -80,16 +80,26 @@
     <div class="container mt-3">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-4">Lista de Ordens de Serviço</h2>
-            <!-- Adicione o link para adicionar uma nova ordem de serviço, se necessário -->
+
+            <!-- Botão para listar por status -->
+            <div>
+                <button type="button" class="btn btn-primary" onclick="listarPorStatus('em-analise')">Em Análise</button>
+                <button type="button" class="btn btn-success" onclick="listarPorStatus('aprovadas')">Aprovadas</button>
+                <button type="button" class="btn btn-danger" onclick="listarPorStatus('recusadas')">Recusadas</button>
+            </div>
         </div>
         <!-- Exibição de mensagem de erro -->
         <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
+                <div class="col-lg-12">
+                    <h2 >Pendentes</h2>
+                </div>
                 <!-- Loop para cada serviceOrder -->
-                <div th:each="serviceOrder : ${serviceOrders}">
-                    <div th:class="${serviceOrder.status == null} ? 'border-primary' : (${serviceOrder.status == true} ? 'border-success' : 'border-danger')">
+                <div th:each="serviceOrder : ${serviceOrders}" th:if="${serviceOrder.status == null}">
+                    <!-- Conteúdo da card para status "Em Análise" -->
+                    <div class="border-primary card mb-3">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${serviceOrder.tipoServico}"></h5>
                             <p class="card-text"><strong>Solução:</strong> <span th:text="${serviceOrder.solucao}"></span></p>
@@ -101,11 +111,7 @@
                             <p class="card-text"><strong>Veículo:</strong> <span th:text="${serviceOrder.veiculo.placa}"></span></p>
                             <p class="card-text"><strong>Material:</strong> <span th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></span></p>
                             <p class="card-text"><strong>Total:</strong> <span th:text="${serviceOrder.total}"></span></p>
-                            <p class="card-text"><strong>Status:</strong>
-                                <span th:if="${serviceOrder.status == true}" class="text-success">Aceito</span>
-                                <span th:if="${serviceOrder.status == false}" class="text-danger">Recusado</span>
-                                <span th:if="${serviceOrder.status == null}" class="text-secondary">Em análise</span>
-                            </p>
+                            <p class="card-text"><strong>Status:</strong> <span class="text-secondary">Em análise</span></p>
                             <div class="btn-group" role="group">
                                 <!-- Adicione o botão de exclusão -->
                                 <form th:action="@{/excluir-servico/{id}(id=${serviceOrder.id})}" method="post">
@@ -121,7 +127,96 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-4">Aprovados</h2>
+            <!-- Adicione o link para adicionar uma nova ordem de serviço, se necessário -->
+        </div>
+        <!-- Exibição de mensagem de erro -->
+        <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Loop para cada serviceOrder -->
+                <div th:each="serviceOrder : ${serviceOrders}" th:if="${serviceOrder.status == true}">
+                    <!-- Conteúdo da card para status "Aprovadas" -->
+                    <div class="border-success card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${serviceOrder.tipoServico}"></h5>
+                            <p class="card-text"><strong>Solução:</strong> <span th:text="${serviceOrder.solucao}"></span></p>
+                            <p class="card-text"><strong>Defeito:</strong> <span th:text="${serviceOrder.defeito}"></span></p>
+                            <p class="card-text"><strong>Abertura:</strong> <span th:text="${#temporals.format(serviceOrder.dataEntrada, 'yyyy-MM-dd')}"></span></p>
+                            <p class="card-text"><strong>Entrega:</strong> <span th:text="${#temporals.format(serviceOrder.dataSaida, 'yyyy-MM-dd')}"></span></p>
+                            <p class="card-text"><strong>Responsável:</strong> <span th:text="${serviceOrder.equipe.nome}"></span></p>
+                            <p class="card-text"><strong>Proprietário:</strong> <span th:text="${serviceOrder.cliente.nome}"></span></p>
+                            <p class="card-text"><strong>Veículo:</strong> <span th:text="${serviceOrder.veiculo.placa}"></span></p>
+                            <p class="card-text"><strong>Material:</strong> <span th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></span></p>
+                            <p class="card-text"><strong>Total:</strong> <span th:text="${serviceOrder.total}"></span></p>
+                            <p class="card-text"><strong>Status:</strong> <span class="text-success">Aceito</span></p>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de exclusão -->
+                                <form th:action="@{/excluir-servico/{id}(id=${serviceOrder.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger custom-delete-btn">Excluir</button>
+                                </form>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de edição -->
+                                <a th:href="@{/editar-servico/{id}(id=${serviceOrder.id})}" class="btn btn-primary custom-edit-btn">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-4">Recusados</h2>
+        </div>
+        <!-- Exibição de mensagem de erro -->
+        <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Loop para cada serviceOrder -->
+                <div th:each="serviceOrder : ${serviceOrders}" th:if="${serviceOrder.status == false}">
+                    <!-- Conteúdo da card para status "Recusados" -->
+                    <div class="border-danger card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${serviceOrder.tipoServico}"></h5>
+                            <p class="card-text"><strong>Solução:</strong> <span th:text="${serviceOrder.solucao}"></span></p>
+                            <p class="card-text"><strong>Defeito:</strong> <span th:text="${serviceOrder.defeito}"></span></p>
+                            <p class="card-text"><strong>Abertura:</strong> <span th:text="${#temporals.format(serviceOrder.dataEntrada, 'yyyy-MM-dd')}"></span></p>
+                            <p class="card-text"><strong>Entrega:</strong> <span th:text="${#temporals.format(serviceOrder.dataSaida, 'yyyy-MM-dd')}"></span></p>
+                            <p class="card-text"><strong>Responsável:</strong> <span th:text="${serviceOrder.equipe.nome}"></span></p>
+                            <p class="card-text"><strong>Proprietário:</strong> <span th:text="${serviceOrder.cliente.nome}"></span></p>
+                            <p class="card-text"><strong>Veículo:</strong> <span th:text="${serviceOrder.veiculo.placa}"></span></p>
+                            <p class="card-text"><strong>Material:</strong> <span th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></span></p>
+                            <p class="card-text"><strong>Total:</strong> <span th:text="${serviceOrder.total}"></span></p>
+                            <p class="card-text"><strong>Status:</strong> <span class="text-danger">Recusado</span></p>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de exclusão -->
+                                <form th:action="@{/excluir-servico/{id}(id=${serviceOrder.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger custom-delete-btn">Excluir</button>
+                                </form>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de edição -->
+                                <a th:href="@{/editar-servico/{id}(id=${serviceOrder.id})}" class="btn btn-primary custom-edit-btn">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
 </main>
 </body>
 <script>
