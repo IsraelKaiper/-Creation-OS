@@ -113,7 +113,6 @@
             <div class="form-group">
                 <label for="equipe">Equipe</label>
                 <select class="form-control" id="equipe" th:field="*{equipe.id}">
-                    <!-- Incluir opções para equipes -->
                     <option th:each="e : ${equipes}" th:value="${e.id}" th:text="${e.nome}"></option>
                 </select>
             </div>
@@ -121,7 +120,6 @@
             <div class="form-group">
                 <label for="cliente">Cliente</label>
                 <select class="form-control" id="cliente" th:field="*{cliente.id}">
-                    <!-- Incluir opções para clientes -->
                     <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
                 </select>
             </div>
@@ -129,7 +127,6 @@
             <div class="form-group">
                 <label for="veiculo">Veículo</label>
                 <select class="form-control" id="veiculo" th:field="*{veiculo.id}">
-                    <!-- Incluir opções para veículos -->
                     <option th:each="v : ${veiculos}" th:value="${v.id}" th:text="${v.placa}"></option>
                 </select>
             </div>
@@ -150,9 +147,10 @@
             <!-- Campo de Status -->
             <div class="form-group">
                 <label for="status">Status</label>
-                <select class="form-control" id="status" th:field="*{status}" required>
-                    <option value="true" th:selected="${serviceOrder.status}">Aceito</option>
-                    <option value="false" th:selected="${!serviceOrder.status}">Recusado</option>
+                <select id="status" th:field="*{status}" class="form-control" required>
+                    <option th:value="true" th:selected="${serviceOrder.status != null && serviceOrder.status == true}">Aceito</option>
+                    <option th:value="false" th:selected="${serviceOrder.status != null && serviceOrder.status == false}">Recusado</option>
+                    <option th:value="null" th:selected="${serviceOrder.status == null}">Em análise</option>
                 </select>
             </div>
 

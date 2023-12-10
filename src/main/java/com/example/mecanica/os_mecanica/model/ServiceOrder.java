@@ -22,15 +22,16 @@ public class ServiceOrder {
 
     private String defeito;
 
-    private LocalDate  data_entrada;
+    private LocalDate data_entrada;
 
-    private LocalDate  data_saida;
+    private LocalDate data_saida;
 
     private Double total;
 
     private Boolean status;
 
     private String tipo_servico;
+
     @ManyToOne
     @JoinColumn(name = "equipe_id")
     private Equipe equipe;
@@ -50,6 +51,8 @@ public class ServiceOrder {
             inverseJoinColumns = @JoinColumn(name = "peca_id")
     )
     private Set<Peca> pecas = new HashSet<>();
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -75,20 +78,44 @@ public class ServiceOrder {
         this.defeito = defeito;
     }
 
-    public LocalDate  getDataEntrada() {
+    public LocalDate getDataEntrada() {
         return data_entrada;
     }
 
-    public void setDataEntrada(LocalDate  dataEntrada) {
+    public void setDataEntrada(LocalDate dataEntrada) {
         this.data_entrada = dataEntrada;
     }
 
-    public LocalDate  getDataSaida() {
+    public LocalDate getDataSaida() {
         return data_saida;
     }
 
-    public void setDataSaida(LocalDate  dataSaida) {
+    public void setDataSaida(LocalDate dataSaida) {
         this.data_saida = dataSaida;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getTipoServico() {
+        return tipo_servico;
+    }
+
+    public void setTipoServico(String tipoServico) {
+        this.tipo_servico = tipoServico;
     }
 
     public Equipe getEquipe() {

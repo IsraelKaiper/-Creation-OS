@@ -157,8 +157,8 @@
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" th:field="*{status}" class="form-control" required>
-                            <option value="true">Em análise</option>
-                            <option value="false">Pendente</option>
+
+                            <option th:value="null">Em análise</option>
                         </select>
                     </div>
 

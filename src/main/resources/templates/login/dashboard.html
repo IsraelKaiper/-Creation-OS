@@ -85,56 +85,41 @@
         <!-- Exibição de mensagem de erro -->
         <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
-        <div class="table-responsive">
-            <table class="table table-bordered custom-table">
-                <thead class="thead-dark">
-                <tr>
-                    <th class="text-wrap">Serviço</th>
-                    <th class="text-wrap">Solução</th>
-                    <th class="text-wrap">Defeito</th>
-                    <th class="text-wrap">Abertura</th>
-                    <th class="text-wrap">Entrega</th>
-                    <th class="text-wrap">Responsável</th>
-                    <th class="text-wrap">Proprietário</th>
-                    <th class="text-wrap">Veículo</th>
-                    <th class="text-wrap">Material</th>
-                    <th class="text-wrap">Total</th>
-                    <th class="text-wrap">Status</th>
-                    <th class="text-wrap">Ações</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="serviceOrder : ${serviceOrders}">
-                    <td class="text-wrap" th:text="${serviceOrder.tipo_servico}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.solucao}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.defeito}"></td>
-                    <td class="text-wrap" th:text="${#temporals.format(serviceOrder.data_entrada, 'yyyy-MM-dd')}"></td>
-                    <td class="text-wrap" th:text="${#temporals.format(serviceOrder.data_saida, 'yyyy-MM-dd')}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.equipe.nome}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.cliente.nome}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.veiculo.placa}"></td>
-                    <td class="text-wrap" th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.total}"></td>
-                    <!-- Exiba o Status -->
-                    <td class="text-wrap">
-                        <span th:if="${serviceOrder.status}">Aceito</span>
-                        <span th:unless="${serviceOrder.status}">Recusado</span>
-                    </td>
-
-                    <td class="text-wrap">
-                        <div class="btn-group" role="group">
-                            <!-- Adicione o botão de exclusão -->
-                            <form th:action="@{/excluir-servico/{id}(id=${serviceOrder.id})}" method="post">
-                                <button type="submit" class="btn btn-danger custom-delete-btn">Excluir</button>
-                            </form>
-
-                            <!-- Adicione o botão de edição -->
-                            <a th:href="@{/editar-servico/{id}(id=${serviceOrder.id})}" class="btn btn-primary custom-edit-btn">Editar</a>
+        <div class="container">
+            <div class="row">
+                <!-- Loop para cada serviceOrder -->
+                <div th:each="serviceOrder : ${serviceOrders}">
+                    <div th:class="${serviceOrder.status == null} ? 'border-primary' : (${serviceOrder.status == true} ? 'border-success' : 'border-danger')">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${serviceOrder.tipoServico}"></h5>
+                            <p class="card-text"><strong>Solução:</strong> <span th:text="${serviceOrder.solucao}"></span></p>
+                            <p class="card-text"><strong>Defeito:</strong> <span th:text="${serviceOrder.defeito}"></span></p>
+                            <p class="card-text"><strong>Abertura:</strong> <span th:text="${#temporals.format(serviceOrder.dataEntrada, 'yyyy-MM-dd')}"></span></p>
+                            <p class="card-text"><strong>Entrega:</strong> <span th:text="${#temporals.format(serviceOrder.dataSaida, 'yyyy-MM-dd')}"></span></p>
+                            <p class="card-text"><strong>Responsável:</strong> <span th:text="${serviceOrder.equipe.nome}"></span></p>
+                            <p class="card-text"><strong>Proprietário:</strong> <span th:text="${serviceOrder.cliente.nome}"></span></p>
+                            <p class="card-text"><strong>Veículo:</strong> <span th:text="${serviceOrder.veiculo.placa}"></span></p>
+                            <p class="card-text"><strong>Material:</strong> <span th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></span></p>
+                            <p class="card-text"><strong>Total:</strong> <span th:text="${serviceOrder.total}"></span></p>
+                            <p class="card-text"><strong>Status:</strong>
+                                <span th:if="${serviceOrder.status == true}" class="text-success">Aceito</span>
+                                <span th:if="${serviceOrder.status == false}" class="text-danger">Recusado</span>
+                                <span th:if="${serviceOrder.status == null}" class="text-secondary">Em análise</span>
+                            </p>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de exclusão -->
+                                <form th:action="@{/excluir-servico/{id}(id=${serviceOrder.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger custom-delete-btn">Excluir</button>
+                                </form>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <!-- Adicione o botão de edição -->
+                                <a th:href="@{/editar-servico/{id}(id=${serviceOrder.id})}" class="btn btn-primary custom-edit-btn">Editar</a>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

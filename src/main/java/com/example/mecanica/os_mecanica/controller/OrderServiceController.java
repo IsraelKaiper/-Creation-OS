@@ -170,50 +170,48 @@ public class OrderServiceController {
             Cliente cliente = clienteRepository.findById(serviceOrder.getCliente().getId()).orElse(null);
             Veiculo veiculo = veiculoRepository.findById(serviceOrder.getVeiculo().getId()).orElse(null);
 
-            if (equipe != null && cliente != null && veiculo != null) {
-                serviceOrder.setEquipe(equipe);
-                serviceOrder.setCliente(cliente);
-                serviceOrder.setVeiculo(veiculo);
+            ServiceOrder existingServiceOrder = serviceOrderRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Ordem de Serviço inválida: " + id));
 
-                serviceOrderRepository.save(serviceOrder);
+            if (existingServiceOrder != null) {
+                existingServiceOrder.setTipoServico(serviceOrder.getTipoServico());
+                existingServiceOrder.setSolucao(serviceOrder.getSolucao());
+                existingServiceOrder.setDefeito(serviceOrder.getDefeito());
+                existingServiceOrder.setDataEntrada(serviceOrder.getDataEntrada());
+                existingServiceOrder.setDataSaida(serviceOrder.getDataSaida());
+                existingServiceOrder.setEquipe(equipe);
+                existingServiceOrder.setCliente(cliente);
+                existingServiceOrder.setVeiculo(veiculo);
+                existingServiceOrder.setPecas(serviceOrder.getPecas());
+                existingServiceOrder.setTotal(serviceOrder.getTotal());
+                existingServiceOrder.setStatus(serviceOrder.getStatus());
+
+                serviceOrderRepository.save(existingServiceOrder);
+
+                model.addAttribute("success", "Ordem de serviço editada com sucesso!");
 
                 return "redirect:/listar-servico";
             } else {
-                model.addAttribute("error", "Equipe, Cliente ou Veículo não encontrado. Por favor, selecione valores válidos.");
-                List<Equipe> equipes = equipeRepository.findAll();
-                List<Cliente> clientes = clienteRepository.findAll();
-                List<Veiculo> veiculos = veiculoRepository.findAll();
-                List<Peca> pecas = pecaRepository.findAll();
-
-                model.addAttribute("equipes", equipes);
-                model.addAttribute("clientes", clientes);
-                model.addAttribute("veiculos", veiculos);
-                model.addAttribute("pecas", pecas);
-
-                return "redirect:/listar-servico";
+                model.addAttribute("error", "Ordem de serviço não encontrada.");
+                return "erro";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("error", "Erro ao editar ordem de serviço. Por favor, tente novamente.");
-            return "servicos/formularioEditarOrdemServico";
+            model.addAttribute("error", "Erro ao editar a ordem de serviço. Por favor, tente novamente.");
+            return "servicos/formularioEdicaoService";
         }
     }
 
     @PostMapping("/excluir-servico/{id}")
-    public String excluirOrdemServico(@PathVariable Long id) {
+    public String excluirOrdemServico(@PathVariable Long id, Model model) {
         try {
             serviceOrderRepository.deleteById(id);
+            model.addAttribute("success", "Ordem de serviço excluída com sucesso!");
             return "redirect:/listar-servico";
         } catch (Exception e) {
             e.printStackTrace();
+            model.addAttribute("error", "Erro ao excluir a ordem de serviço. Por favor, tente novamente.");
             return "erro";
         }
-    }
-
-    @ExceptionHandler(Exception.class)
-    public String handleException(Exception e, Model model) {
-        e.printStackTrace();
-        model.addAttribute("error", "Ocorreu um erro inesperado. Por favor, tente novamente.");
-        return "erro";
     }
 }
