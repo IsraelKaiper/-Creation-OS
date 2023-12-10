@@ -84,32 +84,31 @@
 
         <form class="form-horizontal" th:action="@{'/editar-cliente/' + ${cliente.id}}" method="post" th:object="${cliente}">
 
-            <!-- Campo oculto para o ID do funcionário (visível apenas para fins de edição) -->
             <input type="hidden" th:field="*{id}" th:unless="${cliente.id == null}" />
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Nome:</label>
+                <label class="col-sm-2 col-form-label">Nome</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{nome}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">E-mail:</label>
+                <label class="col-sm-2 col-form-label">E-mail</label>
                 <div class="col-sm-10">
                     <input type="email" th:field="*{email}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Telefone:</label>
+                <label class="col-sm-2 col-form-label">Telefone</label>
                 <div class="col-sm-10">
                     <input type="tel" th:field="*{telefone}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Endereço:</label>
+                <label class="col-sm-2 col-form-label">Endereço</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{endereco}" class="form-control" required />
                 </div>

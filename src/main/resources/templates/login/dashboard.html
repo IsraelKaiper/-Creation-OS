@@ -85,7 +85,6 @@
         <!-- Exibição de mensagem de erro -->
         <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
-        <!-- Utilize a tabela com o novo design -->
         <div class="table-responsive">
             <table class="table table-bordered custom-table">
                 <thead class="thead-dark">
@@ -100,6 +99,7 @@
                     <th class="text-wrap">Veículo</th>
                     <th class="text-wrap">Material</th>
                     <th class="text-wrap">Total</th>
+                    <th class="text-wrap">Status</th>
                     <th class="text-wrap">Ações</th>
                 </tr>
                 </thead>
@@ -113,8 +113,13 @@
                     <td class="text-wrap" th:text="${serviceOrder.equipe.nome}"></td>
                     <td class="text-wrap" th:text="${serviceOrder.cliente.nome}"></td>
                     <td class="text-wrap" th:text="${serviceOrder.veiculo.placa}"></td>
-                    <td class="text-wrap" th:text="${serviceOrder.total}"></td>
                     <td class="text-wrap" th:each="peca : ${serviceOrder.pecas}" th:text="${peca.nome}"></td>
+                    <td class="text-wrap" th:text="${serviceOrder.total}"></td>
+                    <!-- Exiba o Status -->
+                    <td class="text-wrap">
+                        <span th:if="${serviceOrder.status}">Aceito</span>
+                        <span th:unless="${serviceOrder.status}">Recusado</span>
+                    </td>
 
                     <td class="text-wrap">
                         <div class="btn-group" role="group">

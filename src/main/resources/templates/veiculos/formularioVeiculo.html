@@ -88,37 +88,37 @@
 
                     <!-- Placa -->
                     <div class="form-group">
-                        <label for="placa">Placa:</label>
+                        <label for="placa">Placa</label>
                         <input type="text" id="placa" th:field="*{placa}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('placa')}" th:each="error : ${#fields.errors('placa')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Cor -->
                     <div class="form-group">
-                        <label for="cor">Cor:</label>
+                        <label for="cor">Cor</label>
                         <input type="text" id="cor" th:field="*{cor}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('cor')}" th:each="error : ${#fields.errors('cor')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Modelo -->
                     <div class="form-group">
-                        <label for="modelo">Modelo:</label>
+                        <label for="modelo">Modelo</label>
                         <input type="text" id="modelo" th:field="*{modelo}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('modelo')}" th:each="error : ${#fields.errors('modelo')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Ano -->
                     <div class="form-group">
-                        <label for="ano">Ano:</label>
+                        <label for="ano">Ano</label>
                         <select id="ano" name="ano" class="form-control" required>
-                            <!-- JavaScript para popular o dropdown com anos -->
+
                         </select>
                         <div th:if="${#fields.hasErrors('ano')}" th:each="error : ${#fields.errors('ano')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Seleção do cliente -->
                     <div class="form-group">
-                        <label for="cliente">Dono do carro</label>
+                        <label for="cliente">Proprietário do carro</label>
                         <select id="cliente" th:field="*{cliente.id}" class="form-control" required>
                             <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
                         </select>

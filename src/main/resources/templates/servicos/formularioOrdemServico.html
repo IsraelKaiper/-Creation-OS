@@ -88,42 +88,42 @@
 
                     <!-- Solução -->
                     <div class="form-group">
-                        <label for="solucao">Solução:</label>
+                        <label for="solucao">Solução</label>
                         <input type="text" id="solucao" th:field="*{solucao}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('solucao')}" th:each="error : ${#fields.errors('solucao')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Defeito -->
                     <div class="form-group">
-                        <label for="defeito">Defeito:</label>
+                        <label for="defeito">Defeito</label>
                         <input type="text" id="defeito" th:field="*{defeito}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('defeito')}" th:each="error : ${#fields.errors('defeito')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Tipo de Serviço -->
                     <div class="form-group">
-                        <label for="tipo_servico">Defeito:</label>
+                        <label for="tipo_servico">Tipo de Serviço</label>
                         <input type="text" id="tipo_servico" th:field="*{tipo_servico}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('tipo_servico')}" th:each="error : ${#fields.errors('tipo_servico')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Data de Entrada -->
                     <div class="form-group">
-                        <label for="data_entrada">Data de Entrada:</label>
+                        <label for="data_entrada">Data de Entrada</label>
                         <input type="date" id="data_entrada" th:field="*{data_entrada}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('data_entrada')}" th:each="error : ${#fields.errors('data_entrada')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Data de Saída -->
                     <div class="form-group">
-                        <label for="data_saida">Data de Saída:</label>
+                        <label for="data_saida">Data de Saída</label>
                         <input type="date" id="data_saida" th:field="*{data_saida}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('data_saida')}" th:each="error : ${#fields.errors('data_saida')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>
 
                     <!-- Seleção das Peças -->
                     <div class="form-group">
-                        <label for="pecas">Peças:</label>
+                        <label for="pecas">Peças</label>
                         <select id="pecas" th:field="*{pecas}" class="form-control" multiple required>
                             <option th:each="peca : ${pecas}" th:value="${peca.id}" th:text="${peca.nome}"></option>
                         </select>
@@ -131,7 +131,7 @@
 
                     <!-- Seleção da Equipe -->
                     <div class="form-group">
-                        <label for="equipe">Equipe:</label>
+                        <label for="equipe">Equipe</label>
                         <select id="equipe" th:field="*{equipe.id}" class="form-control" required>
                             <option th:each="equipe : ${equipes}" th:value="${equipe.id}" th:text="${equipe.nome}"></option>
                         </select>
@@ -139,7 +139,7 @@
 
                     <!-- Seleção do Cliente -->
                     <div class="form-group">
-                        <label for="cliente">Cliente:</label>
+                        <label for="cliente">Cliente</label>
                         <select id="cliente" th:field="*{cliente.id}" class="form-control" required>
                             <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>
                         </select>
@@ -147,15 +147,24 @@
 
                     <!-- Seleção do Veículo -->
                     <div class="form-group">
-                        <label for="veiculo">Veículo:</label>
+                        <label for="veiculo">Veículo</label>
                         <select id="veiculo" th:field="*{veiculo.id}" class="form-control" required>
                             <option th:each="veiculo : ${veiculos}" th:value="${veiculo.id}" th:text="${veiculo.placa}"></option>
                         </select>
                     </div>
 
+                    <!-- Campo de Status -->
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" th:field="*{status}" class="form-control" required>
+                            <option value="true">Em análise</option>
+                            <option value="false">Pendente</option>
+                        </select>
+                    </div>
+
                     <!-- Total da compra -->
                     <div class="form-group">
-                        <label for="total">Custo Total:</label>
+                        <label for="total">Custo Total</label>
                         <input type="number" id="total" th:field="*{total}" class="form-control" required>
                         <div th:if="${#fields.hasErrors('total')}" th:each="error : ${#fields.errors('total')}" class="invalid-feedback" th:text="${error}"></div>
                     </div>

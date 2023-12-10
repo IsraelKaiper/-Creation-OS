@@ -85,35 +85,35 @@
             <input type="hidden" th:field="*{id}" />
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Placa:</label>
+                <label class="col-sm-2 col-form-label">Placa</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{placa}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Cor:</label>
+                <label class="col-sm-2 col-form-label">Cor</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{cor}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Modelo:</label>
+                <label class="col-sm-2 col-form-label">Modelo</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{modelo}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Ano:</label>
+                <label class="col-sm-2 col-form-label">Ano</label>
                 <div class="col-sm-10">
                     <input type="number" th:field="*{ano}" class="form-control" required />
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Proprietário:</label>
+                <label class="col-sm-2 col-form-label">Proprietário</label>
                 <div class="col-sm-10">
                     <select th:field="*{cliente.id}" class="form-control" required>
                         <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}"></option>

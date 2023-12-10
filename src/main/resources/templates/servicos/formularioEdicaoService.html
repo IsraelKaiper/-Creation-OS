@@ -86,32 +86,32 @@
             <input type="hidden" th:field="*{id}" />
 
             <div class="form-group">
-                <label for="solucao">Solução:</label>
+                <label for="solucao">Solução</label>
                 <input type="text" class="form-control" id="solucao" th:field="*{solucao}" />
             </div>
 
             <div class="form-group">
-                <label for="defeito">Defeito:</label>
+                <label for="defeito">Defeito</label>
                 <input type="text" class="form-control" id="defeito" th:field="*{defeito}" />
             </div>
 
             <div class="form-group">
-                <label for="tipo_servico">Tipo de Serviço:</label>
+                <label for="tipo_servico">Tipo de Serviço</label>
                 <input type="text" class="form-control" id="tipo_servico" th:field="*{tipo_servico}" />
             </div>
 
             <div class="form-group">
-                <label for="dataEntrada">Data de Entrada:</label>
+                <label for="dataEntrada">Data de Entrada</label>
                 <input type="date" class="form-control" id="dataEntrada" th:field="*{data_entrada}" />
             </div>
 
             <div class="form-group">
-                <label for="dataSaida">Data de Saída:</label>
+                <label for="dataSaida">Data de Saída</label>
                 <input type="date" class="form-control" id="dataSaida" th:field="*{data_saida}" />
             </div>
 
             <div class="form-group">
-                <label for="equipe">Equipe:</label>
+                <label for="equipe">Equipe</label>
                 <select class="form-control" id="equipe" th:field="*{equipe.id}">
                     <!-- Incluir opções para equipes -->
                     <option th:each="e : ${equipes}" th:value="${e.id}" th:text="${e.nome}"></option>
@@ -119,7 +119,7 @@
             </div>
 
             <div class="form-group">
-                <label for="cliente">Cliente:</label>
+                <label for="cliente">Cliente</label>
                 <select class="form-control" id="cliente" th:field="*{cliente.id}">
                     <!-- Incluir opções para clientes -->
                     <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nome}"></option>
@@ -127,7 +127,7 @@
             </div>
 
             <div class="form-group">
-                <label for="veiculo">Veículo:</label>
+                <label for="veiculo">Veículo</label>
                 <select class="form-control" id="veiculo" th:field="*{veiculo.id}">
                     <!-- Incluir opções para veículos -->
                     <option th:each="v : ${veiculos}" th:value="${v.id}" th:text="${v.placa}"></option>
@@ -135,10 +135,24 @@
             </div>
 
             <div class="form-group">
-                <label for="pecas">Peças:</label>
+                <label for="pecas">Peças</label>
                 <select multiple class="form-control" id="pecas" th:field="*{pecas}">
                     <option th:each="peca : ${pecas}" th:value="${peca.id}" th:text="${peca.nome}"
                             th:selected="${serviceOrder.pecas.contains(peca)}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="total">Custo total</label>
+                <input type="number" class="form-control" id="total" th:field="*{total}" />
+            </div>
+
+            <!-- Campo de Status -->
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" th:field="*{status}" required>
+                    <option value="true" th:selected="${serviceOrder.status}">Aceito</option>
+                    <option value="false" th:selected="${!serviceOrder.status}">Recusado</option>
                 </select>
             </div>
 

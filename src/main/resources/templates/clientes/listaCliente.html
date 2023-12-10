@@ -93,19 +93,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${cliente.nome}"></h5>
-                        <p class="card-text">Código: <span th:text="${cliente.id}"></span></p>
-                        <p class="card-text">Email: <span th:text="${cliente.email}"></span></p>
-                        <p class="card-text">Telefone: <span th:text="${cliente.telefone}"></span></p>
-                        <p class="card-text">Endereço: <span th:text="${cliente.endereco}"></span></p>
+                        <p class="card-text">Código <span th:text="${cliente.id}"></span></p>
+                        <p class="card-text">Email <span th:text="${cliente.email}"></span></p>
+                        <p class="card-text">Telefone <span th:text="${cliente.telefone}"></span></p>
+                        <p class="card-text">Endereço <span th:text="${cliente.endereco}"></span></p>
 
-                        <!-- Adiciona o botão de exclusão -->
                         <div class="btn-group" role="group">
                             <form th:action="@{/excluir-cliente/{id}(id=${cliente.id})}" method="post">
                                 <button type="submit" class="btn btn-danger">Excluir</button>
                             </form>
                         </div>
 
-                        <!-- Adiciona o botão de edição -->
                         <div class="btn-group" role="group">
                             <a th:href="@{/editar-cliente/{id}(id=${cliente.id})}" class="btn btn-primary">Editar</a>
                         </div>

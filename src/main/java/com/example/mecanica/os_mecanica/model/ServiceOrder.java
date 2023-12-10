@@ -28,6 +28,8 @@ public class ServiceOrder {
 
     private Double total;
 
+    private Boolean status;
+
     private String tipo_servico;
     @ManyToOne
     @JoinColumn(name = "equipe_id")

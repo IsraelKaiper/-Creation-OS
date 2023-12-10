@@ -31,16 +31,18 @@
 
         <form action="/adicionar/equipe" method="post" th:object="${equipe}" class="needs-validation" novalidate>
 
+          <div th:if="${error}" class="alert alert-danger mt-3" role="alert" th:text="${error}"></div>
+
           <!-- Nome da Equipe -->
           <div class="form-group">
-            <label for="nome">Nome da Equipe:</label>
+            <label for="nome">Nome da Equipe</label>
             <input type="text" id="nome" th:field="*{nome}" class="form-control" required>
             <div th:if="${#fields.hasErrors('nome')}" th:each="error : ${#fields.errors('nome')}" class="invalid-feedback" th:text="${error}"></div>
           </div>
 
           <!-- Função da Equipe -->
           <div class="form-group">
-            <label for="funcao">Função da Equipe:</label>
+            <label for="funcao">Função da Equipe</label>
             <input type="text" id="funcao" th:field="*{funcao}" class="form-control" required>
             <div th:if="${#fields.hasErrors('funcao')}" th:each="error : ${#fields.errors('funcao')}" class="invalid-feedback" th:text="${error}"></div>
           </div>
@@ -53,12 +55,9 @@
             </select>
           </div>
 
-          <!-- Botão de Envio -->
           <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
 
-        <!-- Se houver erro, exibir mensagem -->
-        <div th:if="${error}" class="alert alert-danger mt-3" role="alert" th:text="${error}"></div>
       </div>
     </div>
   </div>
