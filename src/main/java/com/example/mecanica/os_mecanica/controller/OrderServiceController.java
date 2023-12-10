@@ -110,10 +110,25 @@ public class OrderServiceController {
     }
 
     @GetMapping("/listar-servico")
-    public String listarOrdensServico(Model model) {
+    public String listarOrdensServico(@RequestParam(required = false) String status, Model model) {
         try {
-            List<ServiceOrder> serviceOrders = serviceOrderRepository.findAll();
+            List<ServiceOrder> serviceOrders;
+
+            if (status == null) {
+                // Se o status não for fornecido, busca todas as ordens de serviço
+                serviceOrders = serviceOrderRepository.findAll();
+            } else if (status.equals("true") || status.equals("false")) {
+                // Se o status for fornecido como "true" ou "false", converte para boolean e busca as ordens de serviço com o status correspondente
+                boolean statusBoolean = Boolean.parseBoolean(status);
+                serviceOrders = serviceOrderRepository.findByStatus(String.valueOf(statusBoolean));
+            } else {
+                // Se o status for fornecido, mas não for "true" ou "false", exibe todas as ordens de serviço sem filtrar por status
+                serviceOrders = serviceOrderRepository.findAll();
+                status = null; // Define o status como nulo para fins de exibição no HTML
+            }
+
             model.addAttribute("serviceOrders", serviceOrders);
+            model.addAttribute("status", status); // Adiciona o status para fins de exibição no HTML
             return "login/dashboard";
         } catch (Exception e) {
             e.printStackTrace();

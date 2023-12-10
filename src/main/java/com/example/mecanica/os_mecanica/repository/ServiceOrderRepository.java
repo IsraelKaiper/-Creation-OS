@@ -8,4 +8,6 @@ import java.util.List;
 public interface ServiceOrderRepository extends JpaRepository<ServiceOrder, Long> {
     //Método para buscar todos os serviços
     List<ServiceOrder> findAll();
+
+    List<ServiceOrder> findByStatus(String status);
 }
