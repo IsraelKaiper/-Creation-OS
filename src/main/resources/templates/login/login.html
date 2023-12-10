@@ -4,14 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login</title>
+    <!-- Adiciona a biblioteca FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .user-icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="container mt-5">
+<div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-6 login-container">
+            <div class="text-center">
+                <span class="user-icon">&#x1F464;</span>
+                <h2>Login</h2>
+            </div>
             <form th:action="@{/dashboard}" method="post" th:object="${login}">
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -20,10 +43,17 @@
 
                 <div class="form-group">
                     <label for="senha">Password</label>
-                    <input type="password" class="form-control" id="senha" placeholder="Password" th:field="*{senha}">
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="senha" placeholder="Password" th:field="*{senha}">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-eye" id="togglePassword"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
             </form>
         </div>
     </div>
@@ -38,5 +68,15 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const senha = document.getElementById('senha');
+
+    togglePassword.addEventListener('click', function () {
+        const type = senha.getAttribute('type') === 'password' ? 'text' : 'password';
+        senha.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
 </body>
 </html>

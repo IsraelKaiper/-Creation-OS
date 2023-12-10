@@ -1,162 +1,171 @@
- body {
-        font-family: 'Arial', sans-serif;
-    }
-.content {
-    margin-left: 80px;
-    padding: 16px;
-    transition: margin-left 0.3s;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
+body {
+            font-family: 'Arial', sans-serif;
+        }
 
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+        .content {
+            margin-left: 80px;
+            padding: 16px;
+            transition: margin-left 0.3s;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
 
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    max-width: 100%;
-    min-height: 100%;
-    margin: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-}
+        .card {
+            flex: 1;
+            max-width: calc(33.33% - 20px);
+            min-width: 300px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            background-color: #fff;
+            transition: transform 0.3s;
+        }
 
-.card-suspenso {
-    border-left: 6px solid #dc3545;
-    padding-left: 15px;
-    margin-top: 15px;
-}
+        .card:hover {
+            transform: scale(1.03);
+        }
 
-.card-suspenso-text {
-    font-weight: bold;
-    color: #dc3545;
-}
+        .card-suspenso {
+            border-left: 6px solid #dc3545;
+            padding-left: 15px;
+            margin-top: 15px;
+        }
 
-.card h3 {
-    color: #333;
-}
+        .card-suspenso-text {
+            font-weight: bold;
+            color: #dc3545;
+        }
 
-.card p {
-    margin-bottom: 8px;
-}
+        .card h3 {
+            color: #333;
+        }
 
-.card button {
-    background-color: #FF0000;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        .card p {
+            margin-bottom: 8px;
+            color: #555;
+        }
 
-.card button:hover {
-    background-color: #FF0000;
-}
+        .card button,
+        .card a {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
 
-.card a {
-    display: inline-block;
-    background-color: #337ab7;
-    color: white;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 4px;
-}
+        .card button {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+        }
 
-.card a:hover {
-    background-color: #286090;
-}
+        .card button:hover {
+            background-color: #CC0000;
+        }
 
+        .card a {
+            background-color: #337ab7;
+            color: white;
+            text-decoration: none;
+        }
 
-@media screen and (max-width: 600px) {
-    .content {
-        margin-left: 0;
-    }
+        .card a:hover {
+            background-color: #286090;
+        }
 
-    .card {
-        width: calc(100% - 20px);
-    }
- }
-.table {
-     width: 100%;
-     margin-top: 20px;
- }
+        @media screen and (max-width: 992px) {
+            .content {
+                margin-left: 0;
+            }
 
- .table th, .table td {
-     border: 1px solid #dee2e6;
-     padding: 12px;
-     text-align: left;
- }
+            .card {
+                max-width: calc(50% - 20px);
+            }
+        }
 
- .table th {
-     background-color: #f2f2f2;
- }
+        @media screen and (max-width: 600px) {
+            .card {
+                max-width: calc(100% - 20px);
+            }
+        }
 
- .container-fluid {
-     padding-right: 15px;
-     padding-left: 15px;
-     margin-right: auto;
-     margin-left: auto;
- }
- .custom-table {
-         border-collapse: separate;
-         border-spacing: 0 10px;
-         margin-top: 20px;
-     }
+        .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
 
-     .custom-table th,
-     .custom-table td {
-         border: 1px solid #dee2e6;
-         padding: 12px;
-         text-align: left;
-     }
+        .custom-table {
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 20px;
+            width: 100%;
+        }
 
-     .custom-table thead th {
-         background-color: #343a40;
-         color: white;
-         font-weight: bold;
-     }
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
 
-     .custom-table tbody tr:nth-child(odd) {
-         background-color: #f8f9fa;
-     }
+        .custom-table thead th {
+            background-color: #343a40;
+            color: white;
+            font-weight: bold;
+        }
 
-     .custom-actions {
-         display: flex;
-         justify-content: space-between;
-     }
+        .custom-table tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
 
-     .custom-btn-group {
-         display: flex;
-         gap: 10px;
-     }
+        .custom-actions {
+            display: flex;
+            justify-content: space-between;
+        }
 
-     .custom-edit-btn {
-         background-color: #007bff;
-         color: #fff;
-     }
+        .custom-btn-group {
+            display: flex;
+            gap: 10px;
+        }
 
-     .custom-delete-btn {
-         background-color: #dc3545;
-         color: #fff;
-     }
+        .custom-edit-btn,
+        .custom-delete-btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
 
-     .text-wrap {
-         white-space: normal !important;
-         word-wrap: break-word;
-     }
+        .custom-edit-btn {
+            background-color: #007bff;
+        }
+
+        .custom-delete-btn {
+            background-color: #dc3545;
+        }
+
+        .custom-edit-btn:hover,
+        .custom-delete-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .text-wrap {
+            white-space: normal !important;
+            word-wrap: break-word;
+        }

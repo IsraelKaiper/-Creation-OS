@@ -21,6 +21,12 @@ public class UserController {
         return "login/login";
     }
 
+    @GetMapping("/lista-perfil")
+    public String exibirPerfil(Model model) {
+
+        return "login/perfil";
+    }
+
     @PostMapping("/dashboard")
     public String login(@ModelAttribute("login") Login login, Model model) {
         System.out.println(login);
@@ -32,7 +38,7 @@ public class UserController {
             // Se o e-mail existe, verifique as credenciais
             if (u.getSenha().equals(login.getSenha())) {
                 // Se as credenciais estiverem corretas, retorne o nome da página de dashboard
-                return "login/dashboard"; // Caminho atualizado para a pasta login
+                return "redirect:/listar-servico";
             } else {
                 // Se as credenciais estiverem incorretas, adicione uma mensagem de erro e retorne para a página de login
                 model.addAttribute("error", "Credenciais incorretas. Por favor, tente novamente.");
