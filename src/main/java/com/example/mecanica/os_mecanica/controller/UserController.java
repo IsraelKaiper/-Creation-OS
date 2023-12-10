@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -16,12 +18,7 @@ public class UserController {
     @GetMapping("/")
     public String showRegister(Model model) {
         model.addAttribute("login", new Login());
-        return "login/login"; // Caminho atualizado para a pasta login
-    }
-
-    @GetMapping("/dashboard")
-    public String showDashboard() {
-        return "login/dashboard"; // Caminho atualizado para a pasta login
+        return "login/login";
     }
 
     @PostMapping("/dashboard")

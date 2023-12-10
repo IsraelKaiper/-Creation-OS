@@ -104,7 +104,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Loop through your list of ServiceOrders and create a row for each -->
                 <tr th:each="serviceOrder : ${serviceOrders}">
                     <td class="text-wrap" th:text="${serviceOrder.tipo_servico}"></td>
                     <td class="text-wrap" th:text="${serviceOrder.solucao}"></td>

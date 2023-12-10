@@ -82,7 +82,7 @@
     <div class="container mt-3">
         <h2 class="text-center mb-4">Editar Ordem de Serviço</h2>
 
-        <form th:object="${serviceOrder}" th:action="@{/editar-servico}" method="post">
+        <form th:object="${serviceOrder}" th:action="@{/editar-servico/{id}(id=${serviceOrder.id})}" method="post">
             <input type="hidden" th:field="*{id}" />
 
             <div class="form-group">

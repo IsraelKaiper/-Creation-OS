@@ -162,7 +162,7 @@ public class OrderServiceController {
             model.addAttribute("veiculos", veiculos);
             model.addAttribute("pecas", pecas);
 
-            return "redirect:/listar-servico";
+            return "servicos/formularioEdicaoService";
         }
 
         try {
@@ -195,7 +195,7 @@ public class OrderServiceController {
         } catch (Exception e) {
             e.printStackTrace();
             model.addAttribute("error", "Erro ao editar ordem de serviço. Por favor, tente novamente.");
-            return "ordem-servico/formularioEditarOrdemServico";
+            return "servicos/formularioEditarOrdemServico";
         }
     }
 
