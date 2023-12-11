@@ -30,9 +30,6 @@ public class Funcionario {
     @JoinColumn(name = "admin_id")
     private Login admin;
 
-    @OneToMany(mappedBy = "funcionario")
-    private List<Equipe> equipes;
-
     public Funcionario() {
     }
 
@@ -108,13 +105,5 @@ public class Funcionario {
 
     public void setAdmin(Login admin) {
         this.admin = admin;
-    }
-
-    public List<Equipe> getEquipes() {
-        return equipes;
-    }
-
-    public void setEquipes(List<Equipe> equipes) {
-        this.equipes = equipes;
     }
 }

@@ -30,12 +30,11 @@
   height: 100%;
   background: var(--color-white);
   padding: 8px 16px;
-  transition: var(--transition);
+  transition: width var(--transition);
 }
 
 .sidebar.expand {
   width: 250px;
-  transition: var(--transition);
 }
 
 .nav-header {
@@ -50,12 +49,11 @@
   font-size: 23px;
   font-weight: 600;
   opacity: 0;
-  transition: var(--transition);
+  transition: opacity var(--transition);
 }
 
 .sidebar.expand .nav-header .logo {
   opacity: 1;
-  transition: var(--transition);
 }
 
 .nav-header .btn-menu {
@@ -67,6 +65,7 @@
   font-size: 23px;
   cursor: pointer;
   margin-right: 10px;
+  transition: margin-right var(--transition);
 }
 
 .sidebar.expand .nav-header .btn-menu {
@@ -104,6 +103,7 @@
   border-radius: 12px;
   background: var(--color-bg);
   padding: 0;
+  transition: width var(--transition), padding var(--transition);
 }
 
 .sidebar.expand .nav-links input {
@@ -135,12 +135,11 @@
   font-weight: 400;
   white-space: nowrap;
   display: none;
-  transition: var(--transition);
+  transition: display var(--transition), color var(--transition);
 }
 
 .sidebar.expand .nav-links li a .title {
   display: block;
-  transition: var(--transition);
 }
 
 .nav-links li:hover a .title {
@@ -161,13 +160,12 @@
   border-radius: 3px;
   opacity: 0;
   pointer-events: none;
-  transition: 0s;
+  transition: opacity var(--transition), top var(--transition), transform var(--transition);
 }
 
 .sidebar li:hover .tooltip {
   opacity: 1;
   pointer-events: auto;
-  transition: var(--transition);
   top: 50%;
   transform: translateY(-50%);
 }
@@ -185,12 +183,11 @@
   color: var(--color-black);
   border-radius: 12px;
   background: var(--color-white);
-  transition: var(--transition);
+  transition: background var(--transition);
 }
 
 .sidebar.expand .nav-links .search-btn {
   background: transparent;
-  transition: var(--transition);
 }
 
 .sidebar.expand .nav-links li:hover .search-btn {
@@ -210,14 +207,15 @@
   width: 250px;
   left: 0;
   padding: 8px 16px;
+  transition: width var(--transition);
 }
 
 .theme-wrapper .theme-icon {
   font-size: 20px;
   color: var(--color-black);
   display: none;
-  transition: var(--transition);
 }
+
 .sidebar.expand .theme-wrapper .theme-icon {
   display: block;
 }
@@ -227,7 +225,6 @@
   color: var(--color-black);
   font-weight: 400;
   display: none;
-  transition: var(--transition);
 }
 
 .sidebar.expand .theme-wrapper p {
@@ -251,7 +248,7 @@
   border-radius: 50%;
   top: 2px;
   left: 3px;
-  transition: var(--transition);
+  transition: left var(--transition);
 }
 
 .theme-wrapper .theme-btn .theme-ball.dark {
@@ -266,20 +263,10 @@
   min-height: 100vh;
   background: var(--color-bg);
   z-index: 6;
-  transition: var(--transition);
+  transition: left var(--transition), width var(--transition);
 }
 
 .sidebar.expand ~ .home {
   left: 250px;
   width: calc(100% - 250px);
-  transition: var(--transition);
-}
-
-.home p {
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--color-black);
-  display: inline-block;
-  margin: 20px;
-  white-space: nowrap;
 }

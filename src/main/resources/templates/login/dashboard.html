@@ -10,88 +10,89 @@
     <title>Ordem de Serviço</title>
 </head>
 <body>
-<header>
-    <section class="sidebar">
-        <div class="nav-header">
-            <p class="logo">Ordem de Serviço</p>
-            <i class="fas fa-bars btn-menu"></i>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="/listar-servico" title="/listar-servico">
-                    <i class="fas fa-home"></i>
-                    <span class="title">Home</span>
-                </a>
-                <span class="tooltip">Home</span>
-            </li>
-            <li>
-                <a href="/adicionar/servico" title="Adicionar Serviço">
-                    <i class="fas fa-plus-circle"></i>
-                    <span class="title">Adicionar Serviço</span>
-                </a>
-                <span class="tooltip">Adicionar Serviço</span>
-            </li>
-            <li>
-                <a href="/listar-veiculos" title="Listar Veículos">
-                    <i class="fas fa-car"></i>
-                    <span class="title">Listar Veículos</span>
-                </a>
-                <span class="tooltip">Listar Veículos</span>
-            </li>
-            <li>
+<main>
+    <header>
+        <section class="sidebar">
+            <div class="nav-header">
+                <p class="logo">Ordem de Serviço</p>
+                <i class="fas fa-bars btn-menu"></i>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/listar-servico" title="Listar Serviço">
+                        <i class="fas fa-home"></i>
+                        <span class="title">Home</span>
+                    </a>
+                    <span class="tooltip">Home</span>
+                </li>
+                <li>
+                    <a href="/adicionar/servico" title="Adicionar Serviço">
+                        <i class="fas fa-plus-circle"></i>
+                        <span class="title">Adicionar Serviço</span>
+                    </a>
+                    <span class="tooltip">Adicionar Serviço</span>
+                </li>
+                <li>
                 <a href="/listar-funcionarios" title="Listar Funcionários">
-                    <i class="fas fa-user"></i>
+                    <i class="fas fa-users"></i>
                     <span class="title">Listar Funcionários</span>
                 </a>
                 <span class="tooltip">Listar Funcionários</span>
             </li>
-            <li>
-                <a href="/listar-clientes" title="Listar Clientes">
-                    <i class="fas fa-users"></i>
-                    <span class="title">Listar Clientes</span>
-                </a>
-                <span class="tooltip">Listar Clientes</span>
-            </li>
-            <li>
-                <a href="/listar-equipes" title="Adicionar Equipe">
-                    <i class="fas fa-users-cog"></i>
-                    <span class="title">Adicionar Equipe</span>
-                </a>
-                <span class="tooltip">Adicionar Equipe</span>
-            </li>
-            <li>
-                <a href="/listar-pecas" title="Adicionar Peça">
+                <li>
+                    <a href="/listar-clientes" title="Listar Clientes">
+                        <i class="fas fa-user-friends"></i>
+                        <span class="title">Listar Clientes</span>
+                    </a>
+                    <span class="tooltip">Listar Clientes</span>
+                </li>
+                <li>
+                <a href="/listar-pecas" title="Listar Peças">
                     <i class="fas fa-cogs"></i>
-                    <span class="title">Adicionar Peça</span>
+                    <span class="title">Listar Peças</span>
                 </a>
-                <span class="tooltip">Adicionar Peça</span>
+                <span class="tooltip">Listar Peças</span>
             </li>
-            <li>
-                <a href="contact" title="Contato">
-                    <i class="fas fa-envelope"></i>
-                    <span class="title">Contato</span>
-                </a>
-                <span class="tooltip">Contato</span>
-            </li>
+                <li>
+                    <a href="/listar-veiculos" title="Listar Veículos">
+                        <i class="fas fa-car"></i>
+                        <span class="title">Listar Veículos</span>
+                    </a>
+                    <span class="tooltip">Listar Veículos</span>
+                </li>
 
-            <li>
-                <a href="/lista-perfil" title="Tela de Perfil">
-                    <i class="fas fa-users"></i>
-                    <span class="title">Tela de Perfil</span>
-                </a>
-                <span class="tooltip">Tela de Perfil</span>
-            </li>
-        </ul>
-    </section>
-</header>
-<main>
+                <li>
+                    <a href="/listar-equipes" title="Listar Equipes">
+                        <i class="fas fa-users-cog"></i>
+                        <span class="title">Listar Equipes</span>
+                    </a>
+                    <span class="tooltip">Listar Equipes</span>
+                </li>
+
+                <li>
+                    <a href="/lista-perfil" title="Tela de Perfil">
+                        <i class="fas fa-user"></i>
+                        <span class="title">Tela de Perfil</span>
+                    </a>
+                    <span class="tooltip">Tela de Perfil</span>
+                </li>
+                <li>
+                    <a href="https://wa.me/qr/JOXJ2REYIPLRJ1"
+                       title="Contato pelo WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                        <span class="title">Contato</span>
+                    </a>
+                    <span class="tooltip">Contato</span>
+                </li>
+            </ul>
+        </section>
+    </header>
 
 
     <section id="analise">
         <div class="container mt-3">
             <div class="d-flex justify-content-between align-items-center">
                 <h2 class="mb-4">Lista de Ordens de Serviço</h2>
-
                 <div>
                     <a href="#analise" class="btn btn-primary">Em Análise</a>
                     <a href="#aprovado" class="btn btn-success">Aprovadas</a>
@@ -102,9 +103,9 @@
             <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" th:if="${not #lists.isEmpty(serviceOrders)}">
                     <div class="col-lg-12">
-                        <h2 >Pendentes</h2>
+                        <h2>Pendentes</h2>
                     </div>
                     <!-- Loop para cada serviceOrder -->
                     <div th:each="serviceOrder : ${serviceOrders}" th:if="${serviceOrder.status == null}">
@@ -136,15 +137,27 @@
                         </div>
                     </div>
                 </div>
+                <!-- Verificar se há ordens de serviço pendentes -->
+                <div class="row" th:if="${#lists.isEmpty(serviceOrders)}">
+                    <div class="col-lg-12">
+                        <!-- Exibir mensagem quando não houver ordens de serviço pendentes -->
+                        <p>Cadastre uma ordem de serviço e ela aparecerá aqui.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="aprovado">
     <div class="container mt-3">
+        <div class="row" th:if="${not #lists.isEmpty(serviceOrders)}">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-4">Aprovados</h2>
-            <!-- Adicione o link para adicionar uma nova ordem de serviço, se necessário -->
+        </div>
+        <!-- Verificar se há ordens de serviço pendentes -->
+        <div th:if="${#lists.isEmpty(serviceOrders)}">
+            <!-- Exibir mensagem quando não houver ordens de serviço pendentes -->
+            <p>Cadastre uma ordem de serviço e ela aparecerá aqui.</p>
         </div>
         <!-- Exibição de mensagem de erro -->
         <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
@@ -154,7 +167,7 @@
                 <!-- Loop para cada serviceOrder -->
                 <div th:each="serviceOrder : ${serviceOrders}" th:if="${serviceOrder.status == true}">
                     <!-- Conteúdo da card para status "Aprovadas" -->
-                    <div class="card">
+                    <div class="card border-success">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${serviceOrder.tipoServico}"></h5>
                             <p class="card-text"><strong>Solução:</strong> <span th:text="${serviceOrder.solucao}"></span></p>
@@ -182,12 +195,13 @@
                 </div>
             </div>
         </div>
-
+        </div>
     </div>
     </section>
 
     <section id="recusado">
     <div class="container mt-3">
+        <div class="row" th:if="${not #lists.isEmpty(serviceOrders)}">
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="mb-4">Recusados</h2>
         </div>
@@ -199,7 +213,7 @@
                 <!-- Loop para cada serviceOrder -->
                 <div th:each="serviceOrder : ${serviceOrders}" th:if="${serviceOrder.status == false}">
                     <!-- Conteúdo da card para status "Recusados" -->
-                    <div class="card">
+                    <div class="card border-danger card mb-3">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${serviceOrder.tipoServico}"></h5>
                             <p class="card-text"><strong>Solução:</strong> <span th:text="${serviceOrder.solucao}"></span></p>
@@ -227,6 +241,12 @@
                 </div>
             </div>
         </div>
+            <!-- Verificar se há ordens de serviço pendentes -->
+            <div th:if="${#lists.isEmpty(serviceOrders)}">
+                <!-- Exibir mensagem quando não houver ordens de serviço pendentes -->
+                <p>Cadastre uma ordem de serviço e ela aparecerá aqui.</p>
+            </div>
+    </div>
     </div>
     </section>
 </main>
